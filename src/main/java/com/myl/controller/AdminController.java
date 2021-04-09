@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -37,4 +38,17 @@ public class AdminController {
 
         return "admin";
     }
+
+    @RequestMapping("/queryTeacher")
+    public String queryTeacher(){
+        return "redirect:/teacher/queryTeacher";
+    }
+
+    @RequestMapping("/queryStudent")
+    public String queryStudent(){
+        return "redirect:/student/queryStudent";
+    }
+
+
+
 }

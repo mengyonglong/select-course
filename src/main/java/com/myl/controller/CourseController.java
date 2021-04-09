@@ -1,13 +1,15 @@
 package com.myl.controller;
 
 import com.myl.pojo.Course;
+import com.myl.pojo.Teacher;
 import com.myl.service.CourseService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -22,6 +24,13 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+
+    @RequestMapping("/addCourse")
+    public String addCoourse(){
+        return "addCourse";
+    }
+
+
     @RequestMapping("/queryCourse")
     public String queryCourse(Model model){
 
@@ -30,5 +39,20 @@ public class CourseController {
         model.addAttribute("courseList",courseList);
 
         return "courseList";
+    }
+
+
+
+
+    @RequestMapping("/addCourseByTeacher")
+    public String addCourseByTeacher(HttpSession session,Course course){
+        Teacher teacher = (Teacher) session.getAttribute("teacher");
+        System.out.println(course.getC_credit());
+        course.setT_teacherid(teacher.getT_id());
+        course.setT_name(teacher.getT_name());
+        courseService.addCourseByTeacher(course);
+
+        return "success";
+
     }
 }

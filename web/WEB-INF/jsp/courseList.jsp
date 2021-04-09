@@ -26,21 +26,25 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${courseList}" var="course" varStatus="0">
-        <tr>
-            <td>${course.c_id}</td>
-            <td>${course.c_name}</td>
-            <td>${course.c_properties}</td>
-            <td>${course.c_credit}</td>
-            <td>${course.t_name}</td>
-            <td>${course.c_place}</td>
-            <td>
-                <a href="/books/toUpdatePage/${book.bookID}">修改</a>
-                &nbsp; | &nbsp;
-                <a href="/books/deleteBook/${book.bookID}">删除</a>
-            </td>
-        </tr>
-    </c:forEach>
+
+        <c:forEach items="${courseList}" var="course" varStatus="0">
+
+            <tr>
+                <td>${course.c_id}</td>
+                <td>${course.c_name}</td>
+                <td>${course.c_properties}</td>
+                <td>${course.c_credit}</td>
+                <td>${course.t_name}</td>
+                <td>${course.c_place}</td>
+                <td>
+                    <a href="/scourse/selectCourse/${course.c_id}/${course.t_teacherid}">选课</a>
+                </td>
+            </tr>
+
+        </c:forEach>
+
+
+
     </tbody>
 
 

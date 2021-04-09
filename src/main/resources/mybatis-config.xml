@@ -26,6 +26,7 @@
         <mapper resource="com/myl/dao/TeacherMapper.xml"></mapper>
         <mapper resource="com/myl/dao/StudentMapper.xml"></mapper>
         <mapper resource="com/myl/dao/CourseMapper.xml"></mapper>
+        <mapper resource="com/myl/dao/SCourseMapper.xml"></mapper>
     </mappers>
 
 

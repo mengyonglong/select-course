@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd">
+        https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!--    1.关联数据库配置文件,这样就交由Spring去管理-->
     <context:property-placeholder location="classpath:db.properties"/>
@@ -31,13 +31,6 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
     </bean>
 
-    <!--    配置dao接口扫描包，动态实现dao接口注入到Spring容器中，以往通过实现类实现接口，sqlsessionFactory例如：
-     public class UserMapperImpl implements UserMapper {
-     private SqlSessionTemplate sqlSession;
-    public void setSqlSession(SqlSessionTemplate sqlSession) {
-        this.sqlSession = sqlSession;
-    }
-  -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--        注入sqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>

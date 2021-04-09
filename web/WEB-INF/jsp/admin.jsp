@@ -13,9 +13,9 @@
 </head>
 <body>
 <a href="/admin/queryAdmin">管理员管理</a>
-<a href="/teacher/queryTeacher">教师管理</a>
-<a href="/student/queryStudent">学生管理</a>
-<a href="/course/queryCourse">课程管理</a>
+<a href="/admin/queryTeacher">教师管理</a>
+<a href="/admin/queryStudent">学生管理</a>
+<a href="">课程管理</a>
 <table>
     <thead>
     <tr>

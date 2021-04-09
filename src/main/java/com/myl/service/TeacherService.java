@@ -1,5 +1,6 @@
 package com.myl.service;
 
+import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,4 +23,6 @@ public interface TeacherService {
     Teacher queryTeacherByName(String t_name);
 
     List<Teacher> queryTeacher();
+
+
 }

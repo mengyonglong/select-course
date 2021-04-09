@@ -1,5 +1,6 @@
 package com.myl.controller;
 
+import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import com.myl.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,11 @@ public class TeacherController {
     @Qualifier("TeacherServiceImpl")
     private TeacherService teacherService;
 
+    @RequestMapping("/teacher")
+    public String teacher(){
+        return "teacher";
+    }
+
     @RequestMapping("/queryme")
     public String queryMe(String t_name,Model model){
         Teacher teacher = teacherService.queryTeacherByName(t_name);
@@ -41,6 +47,17 @@ public class TeacherController {
 
         return "teacherList";
     }
+
+    @RequestMapping("/addCourse")
+    public String addCourse(){
+        return "redirect:/course/addCourse";
+    }
+
+    @RequestMapping("/addCourseByTeacher")
+    public String addCourseByTeacher(){
+        return "forward:/course/addCourseByTeacher";
+    }
+
 
 
 

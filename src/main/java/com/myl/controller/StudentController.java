@@ -29,4 +29,9 @@ public class StudentController {
 
         return "studentList";
     }
+
+    @RequestMapping("/student")
+    public String student(){
+        return "student";
+    }
 }

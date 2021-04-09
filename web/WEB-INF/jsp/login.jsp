@@ -49,8 +49,10 @@
                     alert("登录失败，查无此人")
                 }else if(data=="admin"){
                     window.location.href="${pageContext.request.contextPath}/admin/queryAdmin";
+                }else if(data=="teacher"){
+                    window.location.href="${pageContext.request.contextPath}/teacher/teacher";
                 }else{
-                    window.location.href="";
+                    window.location.href="${pageContext.request.contextPath}/student/student";
                 }
             }
         })

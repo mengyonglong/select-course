@@ -1,6 +1,7 @@
 package com.myl.dao;
 
 import com.myl.pojo.Course;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,13 +13,16 @@ import java.util.List;
  */
 public interface CourseMapper {
 
-    int addCourseByTeacher(int t_teacherid,Course course);
 
-    int deleteCourseByTeacher(int t_teacherid,int c_id);
+    int deleteCourseByTeacher(String t_teacherid,int c_id);
 
- //   int updateCourse()
 
     List<Course> queryCourse();
+
+
+    int addCourseByTeacher(Course course);
+
+
 
 
 

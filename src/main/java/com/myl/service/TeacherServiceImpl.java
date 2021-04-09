@@ -1,6 +1,7 @@
 package com.myl.service;
 
 import com.myl.dao.TeacherMapper;
+import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,4 +46,5 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> queryTeacher() {
         return teacherMapper.queryTeacher();
     }
+
 }
