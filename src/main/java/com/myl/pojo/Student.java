@@ -15,8 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Student {
     private int s_id;
-    private int s_studentid;
-    private String s_username;
+    private String s_studentid;
     private String s_password;
     private String s_name;
     private String s_sex;

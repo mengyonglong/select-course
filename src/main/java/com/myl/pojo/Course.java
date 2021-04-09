@@ -20,4 +20,5 @@ public class Course {
     private int c_credit;
     private int c_teacherid;
     private String c_place;
+    private String t_name;
 }

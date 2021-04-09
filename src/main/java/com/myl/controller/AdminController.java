@@ -2,7 +2,9 @@ package com.myl.controller;
 
 import com.myl.dao.AdminMapper;
 import com.myl.pojo.Admin;
+import com.myl.pojo.Teacher;
 import com.myl.service.AdminService;
+import com.myl.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ public class AdminController {
     @Autowired
     @Qualifier("AdminServiceImpl")
     private AdminService adminService;
+
 
     @RequestMapping("/queryAdmin")
     public String admin(Model model){

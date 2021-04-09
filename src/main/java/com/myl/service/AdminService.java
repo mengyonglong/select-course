@@ -10,7 +10,10 @@ import java.util.List;
  * @author: meyolo
  * @date: 2021/4/7  20:29
  */
+
 public interface AdminService {
+
+    Admin loginAdmin(String a_username,String a_password);
 
     int addAdmin(Admin admin);
 

@@ -2,6 +2,8 @@ package com.myl.service;
 
 import com.myl.dao.AdminMapper;
 import com.myl.pojo.Admin;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,12 +13,18 @@ import java.util.List;
  * @author: meyolo
  * @date: 2021/4/7  20:29
  */
+
 public class AdminServiceImpl implements AdminService {
 
     private AdminMapper adminMapper;
 
     public void setAdminMapper(AdminMapper adminMapper) {
         this.adminMapper = adminMapper;
+    }
+
+    @Override
+    public Admin loginAdmin(String a_username, String a_password) {
+        return adminMapper.loginAdmin(a_username,a_password);
     }
 
     @Override

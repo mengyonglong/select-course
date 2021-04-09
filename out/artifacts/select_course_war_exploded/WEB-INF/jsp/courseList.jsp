@@ -1,38 +1,39 @@
 <%--
   Created by IntelliJ IDEA.
   User: 10254
-  Date: 2021/4/7
-  Time: 20:39
+  Date: 2021/4/8
+  Time: 10:36
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>管理员</title>
+    <title>课程列表</title>
 </head>
 <body>
-<a href="/admin/queryAdmin">管理员管理</a>
-<a href="/teacher/queryTeacher">教师管理</a>
-<a href="/student/queryStudent">学生管理</a>
-<a href="/course/queryCourse">课程管理</a>
+<h3>课程管理</h3>
 <table>
     <thead>
     <tr>
-        <th>编号</th>
-        <th>姓名</th>
-        <th>性别</th>
-        <th>权限</th>
+        <th>课程号</th>
+        <th>课程名</th>
+        <th>属性</th>
+        <th>学分</th>
+        <th>教师</th>
+        <th>地点</th>
         <th>操作</th>
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${adminList}" var="admin" varStatus="0">
+    <c:forEach items="${courseList}" var="course" varStatus="0">
         <tr>
-            <td>${admin.a_id}</td>
-            <td>${admin.a_name}</td>
-            <td>${admin.a_sex}</td>
-            <td>${admin.a_power}</td>
+            <td>${course.c_id}</td>
+            <td>${course.c_name}</td>
+            <td>${course.c_properties}</td>
+            <td>${course.c_credit}</td>
+            <td>${course.t_name}</td>
+            <td>${course.c_place}</td>
             <td>
                 <a href="/books/toUpdatePage/${book.bookID}">修改</a>
                 &nbsp; | &nbsp;

@@ -15,10 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Teacher {
     private int t_id;
-    private int t_teacherid;
-    private String t_username;
+    private String t_teacherid;
     private String t_password;
     private String t_name;
     private String t_sex;
-    private int t_department;   //学院
+    private String t_department;   //学院
 }

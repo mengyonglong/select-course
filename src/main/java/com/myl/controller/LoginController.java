@@ -1,0 +1,64 @@
+package com.myl.controller;
+
+
+import com.myl.pojo.Admin;
+import com.myl.pojo.Student;
+import com.myl.pojo.Teacher;
+import com.myl.service.AdminService;
+import com.myl.service.StudentService;
+import com.myl.service.TeacherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+/**
+ * @ClassName: LoginController
+ * @Description: TODO
+ * @author: meyolo
+ * @date: 2021/4/8  10:59
+ */
+@Controller
+public class LoginController {
+    @Autowired
+    private AdminService adminService;
+    @Autowired
+    private TeacherService teacherService;
+
+    @Autowired
+    private StudentService studentService;
+
+    @RequestMapping("/goLogin")
+    public String goLogin(){
+        return "login";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/logins")
+    public String login(String id,String password,String radio ){
+        if(radio!=null){
+            if(radio.equals("管理员")){
+                Admin admin = adminService.loginAdmin(id, password);
+                if(admin!=null){
+                    return "admin";
+                }
+            }
+            if(radio.equals("教师")){
+                Teacher teacher = teacherService.loginTeacher(id, password);
+                if(teacher!=null){
+                    return "teacher";
+                }
+            }
+            if(radio.equals("学生")){
+                Student student = studentService.loginStudent(id, password);
+                if(student!=null){
+                    return "student";
+                }
+            }
+
+        }
+
+        return "null";
+    }
+}
