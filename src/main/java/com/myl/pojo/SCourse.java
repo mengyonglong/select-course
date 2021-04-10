@@ -18,4 +18,5 @@ public class SCourse {
     private int c_id;
     private String s_studentid;
     private String t_teacherid;
+    private String c_status;
 }

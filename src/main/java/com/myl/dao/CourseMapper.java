@@ -1,6 +1,8 @@
 package com.myl.dao;
 
 import com.myl.pojo.Course;
+import com.myl.pojo.Student;
+import com.myl.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public interface CourseMapper {
 
     int addCourseByTeacher(Course course);
 
-
+    Teacher queryTeacherCourse(String t_teacherid);
 
 
 

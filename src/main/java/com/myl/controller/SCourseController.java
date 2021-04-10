@@ -1,16 +1,20 @@
 package com.myl.controller;
 
 import com.alibaba.druid.support.spring.stat.SpringStatUtils;
-import com.myl.pojo.SCourse;
+
 import com.myl.pojo.Student;
+
 import com.myl.service.SCourseService;
-import org.apache.ibatis.annotations.Param;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+
 
 /**
  * @ClassName: SCourseController
@@ -30,8 +34,13 @@ public class SCourseController {
         return "redirect:/course/queryCourse";
     }
 
-    @RequestMapping("/selectCourse/{c_id}/{t_teacherid}")
-    public String selectCourse(@PathVariable int c_id, @PathVariable String t_teacherid, HttpSession session){
+    @ResponseBody
+    @RequestMapping("/selectCourse")
+    public String selectCourse(int c_id,  String t_teacherid, HttpSession session){
+
+        System.out.println(c_id);
+        System.out.println(t_teacherid);
+
 
         Student student = (Student) session.getAttribute("student");
 
@@ -40,4 +49,8 @@ public class SCourseController {
 
         return "success";
     }
+
+
+
+
 }

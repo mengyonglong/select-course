@@ -1,6 +1,10 @@
 package com.myl.service;
 
+
 import com.myl.pojo.SCourse;
+import com.myl.pojo.Student;
+
+import java.util.List;
 
 /**
  * @ClassName: SCourseService
@@ -11,4 +15,9 @@ import com.myl.pojo.SCourse;
 public interface SCourseService {
 
     int selectCourse(int c_id,String s_studentid,String t_teacherid);
+
+
+
+
+
 }

@@ -1,8 +1,9 @@
 package com.myl.dao;
-
 import com.myl.pojo.SCourse;
+import com.myl.pojo.Student;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 
 /**
@@ -14,4 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface SCourseMapper {
 
     int selectCourse(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid,@Param("t_teacherid") String t_teacherid);
+
+
+
 }

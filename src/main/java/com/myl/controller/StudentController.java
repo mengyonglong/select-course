@@ -34,4 +34,12 @@ public class StudentController {
     public String student(){
         return "student";
     }
+
+    @RequestMapping("/queryMyCourse")
+    public String queryMyCourse(){
+        return "redirect:/scourse/queryCourseByStudent";
+    }
+
+
+
 }

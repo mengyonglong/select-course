@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @ClassName: Course
  * @Description: TODO
@@ -17,8 +19,10 @@ public class Course {
     private int c_id;
     private String c_name;
     private String c_properties;   //课程性质
-    private int c_credit;
-    private int t_teacherid;
+    private Double c_credit;
+    private String t_teacherid;
     private String c_place;
     private String t_name;
+
+   // private List<Student> students;
 }

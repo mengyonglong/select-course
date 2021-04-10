@@ -1,8 +1,11 @@
 package com.myl.service;
 
-import com.myl.dao.CourseMapper;
 import com.myl.dao.SCourseMapper;
 import com.myl.pojo.SCourse;
+import com.myl.pojo.Student;
+
+import java.util.List;
+
 
 /**
  * @ClassName: SCourseServiceImpl
@@ -22,4 +25,8 @@ public class SCourseServiceImpl implements SCourseService {
     public int selectCourse(int c_id, String s_studentid, String t_teacherid) {
         return scourseMapper.selectCourse(c_id,s_studentid,t_teacherid);
     }
+
+
+
+
 }

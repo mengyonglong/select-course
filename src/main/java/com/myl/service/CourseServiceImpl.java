@@ -2,6 +2,7 @@ package com.myl.service;
 
 import com.myl.dao.CourseMapper;
 import com.myl.pojo.Course;
+import com.myl.pojo.Teacher;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -34,5 +35,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public int addCourseByTeacher(Course course) {
         return courseMapper.addCourseByTeacher(course);
+    }
+
+    @Override
+    public Teacher queryTeacherCourse(String t_teacherid) {
+        return courseMapper.queryTeacherCourse(t_teacherid);
     }
 }

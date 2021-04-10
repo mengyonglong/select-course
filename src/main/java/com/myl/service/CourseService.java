@@ -1,6 +1,7 @@
 package com.myl.service;
 
 import com.myl.pojo.Course;
+import com.myl.pojo.Teacher;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,5 +22,8 @@ public interface CourseService {
     List<Course> queryCourse();
 
     int addCourseByTeacher( Course course);
+
+    Teacher queryTeacherCourse(String t_teacherid);
+
 
 }

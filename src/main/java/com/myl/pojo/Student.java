@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 /**
  * @ClassName: Student
  * @Description: TODO
@@ -21,4 +23,6 @@ public class Student {
     private String s_sex;
     private int s_age;
     private String s_department;    //学院
+
+    private List<Course> courses;
 }
