@@ -8,13 +8,13 @@
         select * from choose_course.teacher where t_teacherid=#{t_teacherid} and t_password=#{t_password}
     </select>
 
-    <insert id="addAdmin" parameterType="Admin">
-        insert into choose_course.teacher(t_teacherid,t_password,t_name,t_sex,t_department)
-        values(#{t_teacherid},#{t_password},#{t_name},#{t_sex},#{t_department})
+    <insert id="addTeacher" parameterType="Teacher">
+        insert into choose_course.teacher(t_teacherid,t_name,t_sex,t_department)
+        values(#{t_teacherid},#{t_name},#{t_sex},#{t_department})
     </insert>
 
 
-    <update id="updateAdmin" parameterType="Admin">
+    <update id="updateTeacher" parameterType="Teacher">
         update choose_course.teacher
         set t_teacherid=#{t_teacherid},t_password=#{t_password},t_name=#{t_name},t_sex=#{t_sex},t_department=#{t_department}
         where t_id = #{t_id}

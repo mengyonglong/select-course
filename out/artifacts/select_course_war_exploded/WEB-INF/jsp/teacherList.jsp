@@ -13,6 +13,7 @@
 </head>
 <body>
 <h3>教师管理</h3>
+<a href="/teacher/ToaddTeacher">添加教师</a>
 <table>
     <thead>
     <tr>
@@ -38,8 +39,6 @@
         </tr>
     </c:forEach>
     </tbody>
-
-
 </table>
 
 

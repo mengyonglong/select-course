@@ -1,17 +1,12 @@
 package com.myl.controller;
 
-import com.myl.dao.AdminMapper;
 import com.myl.pojo.Admin;
-import com.myl.pojo.Teacher;
 import com.myl.service.AdminService;
-import com.myl.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.List;
 
 /**
@@ -49,6 +44,10 @@ public class AdminController {
         return "redirect:/student/queryStudent";
     }
 
+    @RequestMapping("/addTeacher")
+    public String addTeacher(){
+        return "redirect:/teacher/addTeacher";
+    }
 
 
 }
