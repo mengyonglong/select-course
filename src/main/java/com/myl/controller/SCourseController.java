@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 
@@ -41,14 +42,23 @@ public class SCourseController {
         System.out.println(c_id);
         System.out.println(t_teacherid);
 
-
         Student student = (Student) session.getAttribute("student");
-
         sCourseService.selectCourse(c_id,student.getS_studentid(),t_teacherid);
-
 
         return "success";
     }
+
+
+    @ResponseBody
+    @RequestMapping("/deleteCourseByStudent")
+    public String deleteCourseByStudent(int c_id,String s_studentid){
+        sCourseService.deleteCourseByStudent(c_id,s_studentid);
+
+        return "success";
+    }
+
+
+
 
 
 

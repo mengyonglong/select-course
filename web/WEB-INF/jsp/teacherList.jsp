@@ -14,7 +14,7 @@
 <body>
 <h3>教师管理</h3>
 <a href="/teacher/ToaddTeacher">添加教师</a>
-<table>
+<table border="1px solid #ccc" cellspacing="0" cellpadding="0">
     <thead>
     <tr>
         <th>编号</th>

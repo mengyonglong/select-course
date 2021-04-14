@@ -2,6 +2,7 @@ package com.myl.service;
 
 import com.myl.dao.CourseMapper;
 import com.myl.pojo.Course;
+import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,9 +23,10 @@ public class CourseServiceImpl implements CourseService {
         this.courseMapper = courseMapper;
     }
 
+
     @Override
-    public int deleteCourseByTeacher(int t_teacherid, int c_id) {
-        return deleteCourseByTeacher(t_teacherid,c_id);
+    public int deleteCourseByTeacher(String t_teacherid, int c_id) {
+        return courseMapper.deleteCourseByTeacher(t_teacherid,c_id);
     }
 
     @Override
@@ -41,4 +43,11 @@ public class CourseServiceImpl implements CourseService {
     public Teacher queryTeacherCourse(String t_teacherid) {
         return courseMapper.queryTeacherCourse(t_teacherid);
     }
+
+    @Override
+    public List<Course> queryCourseStudent(String s_studentid) {
+        return courseMapper.queryCourseStudent(s_studentid);
+    }
+
+
 }

@@ -37,7 +37,7 @@ public class StudentController {
 
     @RequestMapping("/queryMyCourse")
     public String queryMyCourse(){
-        return "redirect:/scourse/queryCourseByStudent";
+        return "redirect:/course/queryCourseByStudent";
     }
 
 

@@ -11,7 +11,7 @@
     <title>学生</title>
 </head>
 <body>
-<a href="/scourse/queryScourse">查看全部课程</a>
+<a href="/course/queryCourse">查看全部课程</a>
 <a href="/student/queryMyCourse">查看已选课程</a>
 </body>
 </html>

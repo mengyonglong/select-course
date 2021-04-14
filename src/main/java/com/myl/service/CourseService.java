@@ -1,6 +1,7 @@
 package com.myl.service;
 
 import com.myl.pojo.Course;
+import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +17,7 @@ import java.util.List;
 public interface CourseService {
 
 
-    int deleteCourseByTeacher(int t_teacherid,int c_id);
+    int deleteCourseByTeacher(String t_teacherid,int c_id);
 
 
     List<Course> queryCourse();
@@ -25,5 +26,6 @@ public interface CourseService {
 
     Teacher queryTeacherCourse(String t_teacherid);
 
+    List<Course> queryCourseStudent(String s_studentid);
 
 }

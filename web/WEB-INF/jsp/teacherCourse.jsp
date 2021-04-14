@@ -10,11 +10,12 @@
 <html>
 <head>
     <title>教师课程</title>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-3.6.0.js"></script>
 </head>
 <body>
-<h1>教师课程列表</h1>
+<h1>开设课程列表</h1>
 
-<table>
+<table border="1px solid #ccc" cellspacing="0" cellpadding="0">
     <thead>
     <tr>
         <th>课程号</th>
@@ -37,7 +38,7 @@
             <td>${course.c_place}</td>
             <td>
                 <button type="button" id="selects${course.c_id}" value="退课"
-                        onclick="select(${course.c_id},${course.t_teacherid})">退课
+                        onclick="remove(${course.c_id})">退课
                 </button>
             </td>
         </tr>
@@ -50,6 +51,26 @@
 
 </table>
 
+<script>
+    function remove(c_id) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/teacher/deleteCourseByTeacher",
+            type: "post",
+            data: {
+                "c_id": c_id
+            },
+            success: function (data) {
+                if (data === "success") {
+                    alert("退选成功");
+                    window.location.href="";
+                }
+
+            }
+        })
+    }
+
+
+</script>
 
 </body>
 </html>

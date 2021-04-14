@@ -26,7 +26,10 @@ public class SCourseServiceImpl implements SCourseService {
         return scourseMapper.selectCourse(c_id,s_studentid,t_teacherid);
     }
 
-
+    @Override
+    public int deleteCourseByStudent(int c_id, String s_studentid) {
+        return scourseMapper.deleteCourseByStudent(c_id,s_studentid);
+    }
 
 
 }

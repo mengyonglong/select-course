@@ -15,7 +15,7 @@
 </head>
 <body>
 <h3>课程管理</h3>
-<table>
+<table border="1px solid #ccc" cellspacing="0" cellpadding="0">
     <thead>
     <tr>
         <th>课程号</th>

@@ -1,12 +1,17 @@
 package com.myl.controller;
 
 import com.myl.pojo.Admin;
+import com.myl.pojo.Student;
 import com.myl.service.AdminService;
+import com.myl.service.StudentService;
+import com.myl.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -22,6 +27,12 @@ public class AdminController {
     @Autowired
     @Qualifier("AdminServiceImpl")
     private AdminService adminService;
+
+    @Resource
+    private TeacherService teacherService;
+
+    @Resource
+    private StudentService studentService;
 
 
     @RequestMapping("/queryAdmin")
@@ -48,6 +59,7 @@ public class AdminController {
     public String addTeacher(){
         return "redirect:/teacher/addTeacher";
     }
+
 
 
 }

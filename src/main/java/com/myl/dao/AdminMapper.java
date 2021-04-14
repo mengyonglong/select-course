@@ -14,16 +14,22 @@ import java.util.List;
  */
 public interface AdminMapper {
 
+    // 管理员登录
     Admin loginAdmin(@Param("a_username") String a_username, @Param("a_password") String a_password);
 
+    // 添加管理员
     int addAdmin(Admin admin);
 
+    // 删除管理员
     int deleteAdminById(int a_id);
 
+    // 修改管理员信息
     int updateAdmin(Admin admin);
 
+    // 通过管理员编号查找管理员
     int queryAdminById(int a_id);
 
+    // 查询所有的管理员
     List<Admin> queryAdmin();
 
 }

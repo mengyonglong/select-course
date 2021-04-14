@@ -1,6 +1,5 @@
 package com.myl.dao;
 
-import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,22 +14,20 @@ import java.util.List;
 public interface TeacherMapper {
 
 
-    // 这里需要增加@Param注解  表明参数
-    Teacher loginTeacher(@Param("t_teacherid")String t_teacherid,@Param("t_password") String t_password);
+    // 教师登录
+    Teacher loginTeacher(@Param("t_teacherid") String t_teacherid, @Param("t_password") String t_password);
 
+    // 添加教师
     int addTeacher(Teacher teacher);
 
+    // 修改教师信息
     int updateTeacher(Teacher teacher);
 
+    // 通过教师姓名相关信息查询教师
     Teacher queryTeacherByName(String t_name);
 
+    // 查询所有教师
     List<Teacher> queryTeacher();
-
-
-
-
-
-
 
 
 }

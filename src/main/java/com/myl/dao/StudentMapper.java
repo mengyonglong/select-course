@@ -13,11 +13,15 @@ import java.util.List;
  */
 public interface StudentMapper {
 
-    Student loginStudent(@Param("s_studentid") String s_studentid,@Param("s_password") String s_password);
+    // 学生登录
+    Student loginStudent(@Param("s_studentid") String s_studentid, @Param("s_password") String s_password);
 
+    // 查询所有学生
     List<Student> queryStudent();
 
+    // 通过学生姓名相关信息查询学生
     Student queryStudentByName();
 
+    // 修改学生信息
     Student updateStudent(Student student);
 }

@@ -9,6 +9,10 @@
         insert into choose_course.scourse(c_id,s_studentid,t_teacherid,c_status) values(#{c_id},#{s_studentid},#{t_teacherid},"已选")
     </insert>
 
+    <delete id="deleteCourseByStudent">
+        delete from choose_course.scourse where s_studentid =#{s_studentid} and c_id =#{c_id}
+    </delete>
+
 
 
 

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myl.pojo.Teacher;
 import com.myl.service.TeacherService;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -12,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.security.PublicKey;
 import java.util.List;
 
 /**
@@ -43,16 +43,6 @@ public class TeacherController {
         return "teacherme";
     }
 
-    //  查询所有的教师信息
-    @RequestMapping("/queryTeacher")
-    public String queryTeacher(Model model) {
-
-        List<Teacher> teacherList = teacherService.queryTeacher();
-
-        model.addAttribute("teacherList", teacherList);
-
-        return "teacherList";
-    }
 
     //  进入到增加课程信息页面
     @RequestMapping("/addCourse")
@@ -73,18 +63,28 @@ public class TeacherController {
         return "addTeacher";
     }
 
+    @RequestMapping("/queryCourseByTeacher")
+    public String queryCourseByTeacher() {
+        return "redirect:course/queryCourseByTeacher";
+    }
+
     //  管理员添加教师
     @ResponseBody
     @RequestMapping("/addTeacher")
     public String addTeacher(Teacher teacher) throws JsonProcessingException {
         System.out.println(teacher);
-         teacherService.addTeacher(teacher);
+        teacherService.addTeacher(teacher);
 
-         // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
+        // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
         ObjectMapper mapper = new ObjectMapper();
-         String string = mapper.writeValueAsString(teacher);
+        String string = mapper.writeValueAsString(teacher);
 
         return string;
+    }
+
+    @RequestMapping("/deleteCourseByTeacher")
+    public String deleteCourseByTeacher() {
+        return "forward:/course/deleteCourseByTeacher";
     }
 
 

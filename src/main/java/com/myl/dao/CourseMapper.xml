@@ -7,7 +7,7 @@
 
 
     <delete id="deleteCourseByTeacher">
-       delete * from choose_course.course where t_teacherid=#{t_teacherid} and c_id=#{c_id}
+       delete  from choose_course.course where t_teacherid=#{t_teacherid} and c_id=#{c_id}
     </delete>
 
     <select id="queryCourse" resultType="Course">
@@ -38,4 +38,12 @@
             <result property="c_place" column="c_place"></result>
         </collection>
     </resultMap>
+
+    <select id="queryCourseStudent" parameterType="String" resultType="Course">
+        select * from choose_course.course where c_id in
+                            (select c_id from  choose_course.scourse where s_studentid=#{s_studentid})
+    </select>
+
+
+
 </mapper>

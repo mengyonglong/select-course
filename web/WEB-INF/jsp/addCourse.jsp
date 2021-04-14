@@ -11,7 +11,7 @@
     <title>添加课程</title>
 </head>
 <body>
-<form action="" method="post">
+<form action="/teacher/addCourseByTeacher" method="post">
     课程名：<input type="text" name="c_name">
     课程属性<input type="text" name="c_properties">
     学分<input type="text" name="c_credit">
