@@ -32,8 +32,17 @@ public interface CourseMapper {
      */
     Teacher queryTeacherCourse(String t_teacherid);
 
+    // 教师修改课程信息
+    int updateCourse(Course course);
+
+    // 教师查询指定课程
+    Course queryCourseByTeacher(int c_id);
+
     // 学生查询自己所选的课程
     List<Course> queryCourseStudent(String s_studentid);
+
+    // 学生根据课程名搜索相关课程
+    List<Course> searchCourseByName(String c_name);
 
 
 }

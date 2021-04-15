@@ -31,5 +31,15 @@ public class SCourseServiceImpl implements SCourseService {
         return scourseMapper.deleteCourseByStudent(c_id,s_studentid);
     }
 
+    @Override
+    public List<Student> queryStudentOfTeacher(int c_id) {
+        return scourseMapper.queryStudentOfTeacher(c_id);
+    }
+
+    @Override
+    public int queryNumber(int c_id) {
+        return scourseMapper.queryNumber(c_id);
+    }
+
 
 }

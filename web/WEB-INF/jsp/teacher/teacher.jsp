@@ -13,6 +13,7 @@
 <body>
 <a href="">个人信息修改</a>
 <a href="/teacher/addCourse">添加课程信息</a>
-<a href="/course/queryCourseByTeacher">查看课程信息</a>
+<a href="/teacher/queryCourseByTeacher">查看课程信息</a>
+
 </body>
 </html>

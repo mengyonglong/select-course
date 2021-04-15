@@ -1,6 +1,9 @@
 package com.myl.service;
 
+import com.myl.pojo.Student;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -15,7 +18,8 @@ public interface SCourseService {
 
     int deleteCourseByStudent(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid);
 
+    List<Student> queryStudentOfTeacher(int c_id);
 
-
+    int queryNumber(int c_id);
 
 }

@@ -12,9 +12,16 @@
     <meta charset="UTF-8">
     <title>课程列表</title>
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 </head>
 <body>
 <h3>课程管理</h3>
+<form class="form-inline" action="/student/searchCourse" method="post" >
+    <input  style="width: 326px;" type="text" class="form-control" name="c_name" value="${c_name}" placeholder="请输入您想要查询课程的名称或课程属性">
+    <input type="submit" value="查询" class="btn btn-success">
+</form>
+
+
 <table border="1px solid #ccc" cellspacing="0" cellpadding="0">
     <thead>
     <tr>
@@ -57,7 +64,7 @@
     function select(c_id, t_teacherid) {
 
         $.ajax({
-            url: "${pageContext.request.contextPath}/scourse/selectCourse",
+            url: "${pageContext.request.contextPath}/student/selectCourse",
             type: "post",
             data: {
                 "c_id": c_id,

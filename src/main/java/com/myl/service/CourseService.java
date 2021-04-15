@@ -26,6 +26,14 @@ public interface CourseService {
 
     Teacher queryTeacherCourse(String t_teacherid);
 
+    int updateCourse(Course course);
+
     List<Course> queryCourseStudent(String s_studentid);
+
+    Course queryCourseByTeacher(int c_id);
+
+    List<Course> searchCourseByName(String c_name);
+
+
 
 }

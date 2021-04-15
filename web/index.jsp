@@ -11,6 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
+  <h2>欢迎进入在线选课系统</h2>
   <a href="/goLogin">去登录</a>
   </body>
 </html>

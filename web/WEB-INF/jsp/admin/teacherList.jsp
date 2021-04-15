@@ -13,7 +13,7 @@
 </head>
 <body>
 <h3>教师管理</h3>
-<a href="/teacher/ToaddTeacher">添加教师</a>
+<a href="/admin/ToaddTeacher">添加教师</a>
 <table border="1px solid #ccc" cellspacing="0" cellpadding="0">
     <thead>
     <tr>

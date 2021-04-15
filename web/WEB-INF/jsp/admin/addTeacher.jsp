@@ -25,7 +25,7 @@
 <script type="text/javascript">
     function addTeacher() {
         $.ajax({
-            url: "${pageContext.request.contextPath}/teacher/addTeacher",
+            url: "${pageContext.request.contextPath}/admin/addTeacher",
             type: 'post',
             dataType:"json",
             //  在这里进行form表单的序列化提交时，需要设置dataType为 "json",否则即使报200但是进error
@@ -33,8 +33,7 @@
             success: function (data) {
                 if (data!=="null") {
                     alert("添加成功");
-                } else {
-                    alert("添加失败");
+                    window.location.href="${pageContext.request.contextPath}/admin/queryTeacher";
                 }
             }
         })
