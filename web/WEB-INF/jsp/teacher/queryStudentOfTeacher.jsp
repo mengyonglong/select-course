@@ -25,7 +25,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${studentList}" var="student" varStatus="0">
+    <c:forEach items="${studentList.list}" var="student" varStatus="0">
         <tr>
             <td>${student.s_studentid}</td>
             <td>${student.s_name}</td>
@@ -40,7 +40,23 @@
     </c:forEach>
     </tbody>
 </table>
-总计人数：${number}
+
+当前第${studentList.pageNum}页，共${studentList.pages}页，共${studentList.total}人
+<br>
+
+
+<a href="/scourse/queryStudentOfTeacher?start=0&c_id=${c_id}">首页</a>
+<a href="/scourse/queryStudentOfTeacher?start=${studentList.prePage}&c_id=${c_id}">上一页</a>
+<c:forEach items="${studentList.navigatepageNums}" var="pageNum">
+    <a href="/scourse/queryStudentOfTeacher?start=${pageNum*2-2}&c_id=${c_id}">${pageNum}</a>
+</c:forEach>
+<input type="text" id="searchstuoftea" placeholder="请输入您想要查询的页码">
+<button name="bts" onclick="searchStuOftea(${c_id})">查询</button>
+<a href="/scourse/queryStudentOfTeacher?start=${studentList.nextPage}&c_id=${c_id}">下一页</a>
+<a href="/scourse/queryStudentOfTeacher?start=${studentList.navigateLastPage}&c_id=${c_id}">尾页</a>
+
+
+
 <script>
     function remove(c_id, s_studentid) {
 
@@ -60,6 +76,13 @@
             }
         })
 
+
+    }
+</script>
+<script>
+    function searchStuOftea(c_id) {
+        var numstutea=$('#searchstuoftea').val()*2-2;
+        window.location.href = '${pageContext.request.contextPath}/scourse/queryStudentOfTeacher?start='+numstutea+'&c_id='+c_id
 
     }
 </script>

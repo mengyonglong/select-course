@@ -38,7 +38,7 @@
             <td>${course.c_place}</td>
             <td>
                 <a href="/teacher/queryCourseTeacher/${course.c_id}">编辑</a>
-                <a href="/scourse/queryStudentOfTeacher/${course.c_id}">详情</a>
+                <a href="/teacher/queryOfTeacher?c_id=${course.c_id}">详情</a>
                 <button type="button" id="selects${course.c_id}" value="退课"
                         onclick="remove(${course.c_id})">退课
                 </button>

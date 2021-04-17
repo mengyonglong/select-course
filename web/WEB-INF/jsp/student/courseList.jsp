@@ -16,8 +16,9 @@
 </head>
 <body>
 <h3>课程管理</h3>
-<form class="form-inline" action="/student/searchCourse" method="post" >
-    <input  style="width: 326px;" type="text" class="form-control" name="c_name" value="${c_name}" placeholder="请输入您想要查询课程的名称或课程属性">
+<form class="form-inline" action="/student/searchCourse" method="post">
+    <input style="width: 326px;" type="text" class="form-control" name="c_name" value="${c_name}"
+           placeholder="请输入您想要查询课程的名称或课程属性">
     <input type="submit" value="查询" class="btn btn-success">
 </form>
 
@@ -35,9 +36,44 @@
     </tr>
     </thead>
     <tbody>
+    <c:if test="${courseLists!=null}">
+    <c:forEach items="${courseLists.list}" var="course" varStatus="0">
 
-    <c:forEach items="${courseList}" var="course" varStatus="0">
+        <tr>
+            <td>${course.c_id}</td>
+            <td>${course.c_name}</td>
+            <td>${course.c_properties}</td>
+            <td>${course.c_credit}</td>
+            <td>${course.t_name}</td>
+            <td>${course.c_place}</td>
+            <td>
+                <button type="button" id="selects${course.c_id}" value="选课"
+                        onclick="select(${course.c_id},${course.t_teacherid})">选课
+                </button>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+当前第${courseLists.pageNum}页，共${courseLists.pages}页，共${courseLists.total}条记录
+<br>
 
+
+<a href="/course/queryCourse?start=0">首页</a>
+<a href="/course/queryCourse?start=${courseLists.prePage}">上一页</a>
+<c:forEach items="${courseLists.navigatepageNums}" var="pageNum">
+    <a href="/course/queryCourse?start=${pageNum*2-2}">${pageNum}</a>
+</c:forEach>
+<input type="text" id="num" placeholder="请输入您想要查询的页码">
+<button name="bt" onclick="search()">查询</button>
+<a href="/course/queryCourse?start=${courseLists.nextPage}">下一页</a>
+<a href="/course/queryCourse?start=${courseLists.navigateLastPage}">尾页</a>
+
+</c:if>
+
+
+<c:if test="${courseList!=null}">
+    <c:forEach items="${courseList.list}" var="course" varStatus="0">
         <tr>
             <td>${course.c_id}</td>
             <td>${course.c_name}</td>
@@ -53,12 +89,25 @@
         </tr>
 
     </c:forEach>
-
-
     </tbody>
+    </table>
 
+    <br>
+    当前第${courseList.pageNum}页，共${courseList.pages}页，共${courseList.total}条记录
+    <br>
+    <a href="/student/searchCourse?start=0&c_name=${c_name}">首页</a>
+    <a href="/student/searchCourse?start=${courseList.prePage}&c_name=${c_name}">上一页</a>
+    <c:forEach items="${courseList.navigatepageNums}" var="pageNum">
+        <a href="/student/searchCourse?start=${pageNum*2-2}&c_name=${c_name}">${pageNum}</a>
+    </c:forEach>
+    <input type="text" id="numByName" placeholder="请输入您想要查询的页码">
 
-</table>
+    <button name="bts" onclick="searches('${c_name}')">查询</button>
+
+    <a href="/student/searchCourse?start=${courseList.nextPage}&c_name=${c_name}">下一页</a>
+    <a href="/student/searchCourse?start=${courseList.navigateLastPage}&c_name=${c_name}">尾页</a>
+</c:if>
+
 
 <script>
     function select(c_id, t_teacherid) {
@@ -76,7 +125,7 @@
                     document.getElementById('selects' + c_id).disabled = true;
                     alert("选课成功");
                 }
-                if(data==="fail"){
+                if (data === "fail") {
                     alert("课程已选，请勿重复选择！");
                 }
 
@@ -85,6 +134,17 @@
 
 
     }
+
+    function search() {
+        var num = $('#num').val() * 2 - 2;
+        window.location.href = '${pageContext.request.contextPath}/course/queryCourse?start=' + num
+    }
+
+    function searches(c_name) {
+        var numByNames = $('#numByName').val() * 2 - 2;
+        window.location.href = '${pageContext.request.contextPath}/student/searchCourse?start=' + numByNames + '&c_name=' + c_name
+    }
 </script>
+
 </body>
 </html>

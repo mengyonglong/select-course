@@ -1,15 +1,15 @@
 package com.myl.controller;
 
 
-import com.myl.pojo.Student;
+import com.github.pagehelper.PageInfo;
 import com.myl.service.SCourseService;
+import com.myl.utils.PageInfos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 
 /**
@@ -34,14 +34,14 @@ public class SCourseController {
 
 
     // 查看教师课程下选课的学生
-    @RequestMapping("/queryStudentOfTeacher/{c_id}")
-    public String queryStudentOfTeacher(@PathVariable("c_id") int c_id, Model model) {
-        List<Student> studentList = sCourseService.queryStudentOfTeacher(c_id);
-        int i = sCourseService.queryNumber(c_id);
+    @RequestMapping("/queryStudentOfTeacher")
+    public String queryStudentOfTeacher(@RequestParam(defaultValue = "1",value = "start")int start, @RequestParam("c_id") int c_id, Model model) {
 
-        model.addAttribute("studentList", studentList);
+        PageInfo pageInfo = PageInfos.queryStudentOfTeacher(start, c_id, sCourseService);
+
+        model.addAttribute("studentList", pageInfo);
         model.addAttribute("c_id", c_id);
-        model.addAttribute("number",i);
+
 
         return "teacher/queryStudentOfTeacher";
     }

@@ -1,18 +1,14 @@
 package com.myl.controller;
 
-import com.myl.pojo.Course;
-import com.myl.pojo.Student;
-import com.myl.pojo.Teacher;
+import com.github.pagehelper.PageInfo;
 import com.myl.service.CourseService;
+
+import com.myl.utils.PageInfos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.servlet.http.HttpSession;
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @ClassName: CourseController
@@ -28,13 +24,14 @@ public class CourseController {
 
 
 
+
     // 查询所有课程
     @RequestMapping("/queryCourse")
-    public String queryCourse(Model model) {
+    public String queryCourse(@RequestParam(defaultValue = "1",value = "start")int start, Model model) {
 
-        List<Course> courseList = courseService.queryCourse();
+        PageInfo pageInfo = PageInfos.PageLimit(start, courseService);
 
-        model.addAttribute("courseList", courseList);
+        model.addAttribute("courseLists", pageInfo);
 
         return "student/courseList";
     }

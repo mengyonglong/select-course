@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -85,6 +86,12 @@ public class TeacherController {
         model.addAttribute("course", course);
 
         return "teacher/updateCourse";
+    }
+
+    // 查看教师课程下选课的学生
+    @RequestMapping("/queryOfTeacher")
+    public String queryOfTeacher(int c_id){
+        return "forward:/scourse/queryStudentOfTeacher";
     }
 
 

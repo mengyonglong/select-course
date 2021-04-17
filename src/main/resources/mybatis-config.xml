@@ -19,7 +19,14 @@
     <typeAliases>
         <package name="com.myl.pojo"/>
     </typeAliases>
-
+<!--    <plugins>-->
+<!--        &lt;!&ndash; com.github.pagehelper为PageHelper类所在包名 &ndash;&gt;-->
+<!--        <plugin interceptor="com.github.pagehelper.PageInterceptor">-->
+<!--            &lt;!&ndash; 使用下面的方式配置参数，后面会有所有的参数介绍 &ndash;&gt;-->
+<!--            <property name="reasonable" value="true"/>-->
+<!--            <property name="helperDialect" value="mysql"/>-->
+<!--        </plugin>-->
+<!--    </plugins>-->
     <!--配置mapper映射-->
     <mappers>
         <mapper resource="com/myl/dao/AdminMapper.xml"></mapper>

@@ -10,6 +10,8 @@
 <html>
 <head>
     <title>教师列表</title>
+    <script src="${pageContext.request.contextPath}/static/js/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
 </head>
 <body>
 <h3>教师管理</h3>
@@ -25,7 +27,7 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach items="${teacherList}" var="teacher" varStatus="0">
+    <c:forEach items="${teacherList.list}" var="teacher" varStatus="0">
         <tr>
             <td>${teacher.t_teacherid}</td>
             <td>${teacher.t_name}</td>
@@ -40,7 +42,29 @@
     </c:forEach>
     </tbody>
 </table>
+当前第${teacherList.pageNum}页，共${teacherList.pages}页，共${teacherList.total}条记录
+<br>
 
+
+<a href="/admin/queryTeacher?start=0">首页</a>
+<a href="/admin/queryTeacher?start=${teacherList.prePage}">上一页</a>
+<c:forEach items="${teacherList.navigatepageNums}" var="pageNum">
+    <a href="/admin/queryTeacher?start=${pageNum*2-2}">${pageNum}</a>
+</c:forEach>
+<input type="text" id="searchtea" placeholder="请输入您想要查询的页码">
+<button name="bts" onclick="searchTea()">查询</button>
+<a href="/admin/queryTeacher?start=${teacherList.nextPage}">下一页</a>
+<a href="/admin/queryTeacher?start=${teacherList.navigateLastPage}">尾页</a>
+
+</body>
+
+<script>
+    function searchTea() {
+        var numtea=$('#searchtea').val()*2-2;
+        window.location.href = '${pageContext.request.contextPath}/admin/queryTeacher?start='+numtea
+
+    }
+</script>
 
 </body>
 </html>

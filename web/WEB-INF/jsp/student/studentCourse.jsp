@@ -30,7 +30,7 @@
     </thead>
     <tbody>
 
-    <c:forEach items="${courseList}" var="course">
+    <c:forEach items="${courseList.list}" var="course">
 
         <tr>
             <td>${course.c_id}</td>
@@ -48,6 +48,22 @@
     </c:forEach>
     </tbody>
 </table>
+当前第${courseList.pageNum}页，共${courseList.pages}页，共${courseList.total}条记录
+<br>
+
+
+<a href="/student/queryMyCourse?start=0">首页</a>
+<a href="/student/queryMyCourse?start=${courseList.prePage}">上一页</a>
+<c:forEach items="${courseList.navigatepageNums}" var="pageNum">
+    <a href="/student/queryMyCourse?start=${pageNum*2-2}">${pageNum}</a>
+</c:forEach>
+<input type="text" id="numPage" placeholder="请输入您想要查询的页码">
+<button name="bt" onclick="searchPage()">查询</button>
+<a href="/student/queryMyCourse?start=${courseList.nextPage}">下一页</a>
+<a href="/student/queryMyCourse?start=${courseList.navigateLastPage}">尾页</a>
+
+
+
 
 <script>
     function remove(c_id, s_studentid) {
@@ -67,7 +83,11 @@
 
             }
         })
+    }
 
+    function searchPage() {
+        var numPage=$('#numPage').val();
+        window.location.href = '${pageContext.request.contextPath}/student/queryMyCourse?start=' + numPage
 
     }
 </script>

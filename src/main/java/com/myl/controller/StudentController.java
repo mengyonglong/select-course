@@ -1,14 +1,17 @@
 package com.myl.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.myl.pojo.Course;
 import com.myl.pojo.Student;
 import com.myl.service.CourseService;
 import com.myl.service.SCourseService;
 import com.myl.service.StudentService;
+import com.myl.utils.PageInfos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -40,10 +43,10 @@ public class StudentController {
 
     // 学生查询自己所选的课程
     @RequestMapping("/queryMyCourse")
-    public String queryCourseByStudent(HttpSession session, Model model) {
-        Student student = (Student) session.getAttribute("student");
-        List<Course> courseList = courseService.queryCourseStudent(student.getS_studentid());
-        model.addAttribute("courseList", courseList);
+    public String queryCourseByStudent(@RequestParam(defaultValue = "1",value = "start")int start,HttpSession session, Model model) {
+
+        PageInfo pageInfo = PageInfos.queryMyCourse(start, courseService, session);
+        model.addAttribute("courseList", pageInfo);
         return "student/studentCourse";
     }
 
@@ -66,11 +69,12 @@ public class StudentController {
         return "success";
     }
 
+    // 搜索查询
     @RequestMapping("/searchCourse")
-    public String queryCourse(String c_name,Model model){
-        List<Course> courseList = courseService.searchCourseByName(c_name);
+    public String queryCourse(@RequestParam(defaultValue = "1",value = "start")int start,@RequestParam(value = "c_name")String c_name, Model model){
+        PageInfo pageInfo = PageInfos.searchCourseByName(start,c_name, courseService);
 
-        model.addAttribute("courseList",courseList);
+        model.addAttribute("courseList",pageInfo);
         model.addAttribute("c_name",c_name);
 
         return "student/courseList";

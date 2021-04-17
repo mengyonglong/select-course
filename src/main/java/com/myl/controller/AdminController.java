@@ -2,17 +2,21 @@ package com.myl.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import com.myl.pojo.Admin;
 import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
 import com.myl.service.AdminService;
 import com.myl.service.StudentService;
 import com.myl.service.TeacherService;
+import com.myl.utils.PageInfos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -52,19 +56,21 @@ public class AdminController {
 
     // 查询所有教师
     @RequestMapping("/queryTeacher")
-    public String queryTeacher(Model model){
-        List<Teacher> teacherList = teacherService.queryTeacher();
+    public String queryTeacher(@RequestParam(defaultValue = "1",value = "start")int start, Model model){
 
-        model.addAttribute("teacherList",teacherList);
+        PageInfo pageInfo = PageInfos.queryTeacher(start, teacherService);
+
+        model.addAttribute("teacherList",pageInfo);
 
         return "admin/teacherList";
     }
 
     @RequestMapping("/queryStudent")
-    public String queryStudent(Model model){
+    public String queryStudent(@RequestParam(defaultValue = "1",value = "start")int start, Model model){
 
-        List<Student> studentList = studentService.queryStudent();
-        model.addAttribute("studentList",studentList);
+        PageInfo pageInfo = PageInfos.queryStudent(start, studentService);
+
+        model.addAttribute("studentList",pageInfo);
 
         return "admin/studentList";
     }

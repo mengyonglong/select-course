@@ -16,5 +16,14 @@
         </mvc:interceptor>
     </mvc:interceptors>
 
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/student/**"/>
+            <mvc:mapping path="/teacher/**"/>
+            <mvc:mapping path="/admin/**"/>
+            <bean class="com.myl.Interceptor.QuanXianIn"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
 
 </beans>
