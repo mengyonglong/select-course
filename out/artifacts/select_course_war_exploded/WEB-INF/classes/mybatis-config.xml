@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--    交由Spring去配置数据源-->
+
+
+    <!--    配置log4j日志   注意这里的顺序-->
+    <settings>
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+
+    <!--设置别名：
+        通过设置包下的别名，默认是包下每一个类的首字母小写  例如：Books  对应的别名books
+        使得BookMapper.xml中sql映射时，不需要全路径，方便映射
+        -->
+    <typeAliases>
+        <package name="com.myl.pojo"/>
+    </typeAliases>
+
+    <!--配置mapper映射-->
+    <mappers>
+        <mapper resource="com/myl/dao/AdminMapper.xml"></mapper>
+        <mapper resource="com/myl/dao/TeacherMapper.xml"></mapper>
+        <mapper resource="com/myl/dao/StudentMapper.xml"></mapper>
+        <mapper resource="com/myl/dao/CourseMapper.xml"></mapper>
+        <mapper resource="com/myl/dao/SCourseMapper.xml"></mapper>
+    </mappers>
+
+
+
+</configuration>
