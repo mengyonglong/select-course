@@ -1,7 +1,5 @@
 package com.myl.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import com.myl.service.CourseService;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -71,6 +68,7 @@ public class TeacherController {
 
     }
 
+    // 教师更新课程信息
     @RequestMapping("/updateCourse")
     public String updateCourse(Course course){
         courseService.updateCourse(course);
@@ -111,16 +109,19 @@ public class TeacherController {
 
     // 教师退选课程
     @ResponseBody
-    @RequestMapping("/deleteCourseByTeacher")
-    public String deleteCourseByTeacher(int c_id, HttpSession session) {
+    @RequestMapping("/deleteCourseTranser")
+    public String deleteCourseTranser(int c_id, HttpSession session) {
         Teacher teacher = (Teacher) session.getAttribute("teacher");
         String t_teacherid = teacher.getT_teacherid();
         try {
-            courseService.deleteCourseByTeacher(t_teacherid, c_id);
-        } catch (Exception e) {
+            courseService.deleteCourseTranser(t_teacherid, c_id);
+
+            return "success";
+        }catch (Exception e){
             System.out.println(e);
+            return "false";
         }
-        return "success";
+
     }
 
     // 教师删除学生选课信息

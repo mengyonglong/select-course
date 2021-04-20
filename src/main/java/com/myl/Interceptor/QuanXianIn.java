@@ -17,8 +17,6 @@ public class QuanXianIn implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("666666");
-        System.out.println(request.getRequestURI());
         HttpSession session = request.getSession();
         if (session.getAttribute("student") != null) {
             if(request.getRequestURI().contains("teacher")){

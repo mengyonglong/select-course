@@ -3,6 +3,8 @@ package com.myl.service;
 import com.myl.dao.TeacherMapper;
 import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -13,9 +15,9 @@ import java.util.List;
  * @author: meyolo
  * @date: 2021/4/8  9:27
  */
-
+@Repository(value = "TeacherServiceImpl")
 public class TeacherServiceImpl implements TeacherService {
-
+@Autowired
     private TeacherMapper teacherMapper;
 
     public void setTeacherMapper(TeacherMapper teacherMapper) {

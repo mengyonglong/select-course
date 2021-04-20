@@ -7,6 +7,9 @@
     <delete id="deleteCourseByTeacher">
        delete  from choose_course.course where t_teacherid=#{t_teacherid} and c_id=#{c_id}
     </delete>
+    <delete id="deleteStudentOfCourse">
+        delete from choose_course.scourse where c_id =#{c_id}
+    </delete>
 
     <select id="queryCourse" resultType="Course">
         select * from choose_course.course

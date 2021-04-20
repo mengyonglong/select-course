@@ -56,7 +56,7 @@
 <script>
     function remove(c_id) {
         $.ajax({
-            url: "${pageContext.request.contextPath}/teacher/deleteCourseByTeacher",
+            url: "${pageContext.request.contextPath}/teacher/deleteCourseTranser",
             type: "post",
             data: {
                 "c_id": c_id
@@ -65,6 +65,8 @@
                 if (data === "success") {
                     alert("退选成功");
                     window.location.href="";
+                }else{
+                    alert("推选失败");
                 }
 
             }

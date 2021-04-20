@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+       http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <import resource="classpath:spring-dao.xml"/>
-    <import resource="classpath:spring-service.xml"/>
+
     <import resource="classpath:spring-mvc.xml"/>
 
-<!--    注册拦截器-->
+    <import resource="spring-service.xml" />
+
+
+
+
+    <!--    注册拦截器-->
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/student/selectCourse"/>

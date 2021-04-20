@@ -30,6 +30,7 @@
         <!--        绑定Mybatis的配置文件-->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
 
+        <!--        使用pageHelper配置-->
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">
@@ -47,14 +48,12 @@
     </bean>
 
 
-
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!--        注入sqlSessionFactory-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
         <!--        设置要扫描的包-->
         <property name="basePackage" value="com.myl.dao"/>
     </bean>
-
 
 
 </beans>

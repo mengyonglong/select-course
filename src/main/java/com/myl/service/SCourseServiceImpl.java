@@ -3,6 +3,8 @@ package com.myl.service;
 import com.myl.dao.SCourseMapper;
 import com.myl.pojo.SCourse;
 import com.myl.pojo.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -13,7 +15,9 @@ import java.util.List;
  * @author: meyolo
  * @date: 2021/4/9  20:48
  */
+@Repository(value = "SCourseServiceImpl")
 public class SCourseServiceImpl implements SCourseService {
+    @Autowired
     private SCourseMapper scourseMapper;
 
     public void setScourseMapper(SCourseMapper scourseMapper) {

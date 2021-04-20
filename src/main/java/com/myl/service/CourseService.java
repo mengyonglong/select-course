@@ -3,6 +3,7 @@ package com.myl.service;
 import com.myl.pojo.Course;
 import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -17,8 +18,7 @@ import java.util.List;
 public interface CourseService {
 
 
-    int deleteCourseByTeacher(String t_teacherid,int c_id);
-
+    Boolean deleteCourseTranser(String t_teacherid, int c_id);
 
     List<Course> queryCourse();
 

@@ -2,6 +2,7 @@ package com.myl.dao;
 
 import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CourseMapper {
 
     // 教师退开所开设的课程
     int deleteCourseByTeacher(@Param("t_teacherid") String t_teacherid, @Param("c_id") int c_id);
-
+    int deleteStudentOfCourse(int c_id);
     // 查询所有的课程
     List<Course> queryCourse();
 

@@ -13,35 +13,16 @@
 
     <!--       1. 扫描service包,其中有注解就可以自动扫描到-->
     <context:component-scan base-package="com.myl.service"/>
-    <!--       2. 将业务类注入到Spring容器中，可以通过配置文件或者注解实现-->
-    <bean id="AdminServiceImpl" class="com.myl.service.AdminServiceImpl">
-        <property name="adminMapper" ref="adminMapper" />
-    </bean>
 
-    <bean id="TeacherServiceImpl" class="com.myl.service.TeacherServiceImpl">
-        <property name="teacherMapper" ref="teacherMapper" />
-    </bean>
+    <!--    基于注解的事务配置-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 
-    <bean id="StudentServiceImpl" class="com.myl.service.StudentServiceImpl">
-        <property name="studentMapper" ref="studentMapper" />
-    </bean>
-
-    <bean id="CourseServiceImpl" class="com.myl.service.CourseServiceImpl">
-        <property name="courseMapper" ref="courseMapper" />
-    </bean>
-
-    <bean id="SCourseServiceImpl" class="com.myl.service.SCourseServiceImpl">
-        <property name="scourseMapper" ref="SCourseMapper"></property>
-    </bean>
-
-    <!--       3. 声明式事务配置-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <!--        注入数据源-->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
 
-    <!--       4. AOP事务支持-->
 
 
 </beans>

@@ -2,8 +2,11 @@ package com.myl.service;
 
 import com.myl.dao.StudentMapper;
 import com.myl.pojo.Student;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -14,9 +17,9 @@ import java.util.List;
  * @date: 2021/4/8  9:53
  */
 
-
+@Repository(value = "StudentServiceImpl")
 public class StudentServiceImpl implements StudentService {
-
+@Autowired
     private StudentMapper studentMapper;
 
     public void setStudentMapper(StudentMapper studentMapper) {
