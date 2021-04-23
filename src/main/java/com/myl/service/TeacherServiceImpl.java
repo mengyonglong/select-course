@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,6 +41,11 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
+    public int deleteTeacher(String t_teacherid) {
+        return teacherMapper.deleteTeacher(t_teacherid);
+    }
+
+    @Override
     public Teacher queryTeacherByName(String t_name) {
         return teacherMapper.queryTeacherByName(t_name);
     }
@@ -48,5 +54,11 @@ public class TeacherServiceImpl implements TeacherService {
     public List<Teacher> queryTeacher() {
         return teacherMapper.queryTeacher();
     }
+
+    @Override
+    public List<String> queryT_department() {
+        return teacherMapper.queryT_department();
+    }
+
 
 }

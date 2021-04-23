@@ -3,6 +3,7 @@ package com.myl.dao;
 import com.myl.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,11 +24,16 @@ public interface TeacherMapper {
     // 修改教师信息
     int updateTeacher(Teacher teacher);
 
+    // 删除教师
+    int deleteTeacher(String t_teacherid);
+
     // 通过教师姓名相关信息查询教师
     Teacher queryTeacherByName(String t_name);
 
     // 查询所有教师
     List<Teacher> queryTeacher();
+
+    List<String> queryT_department();
 
 
 }

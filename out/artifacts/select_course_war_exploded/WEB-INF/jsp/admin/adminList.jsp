@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: 10254
   Date: 2021/4/22
-  Time: 11:57
+  Time: 16:38
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -11,7 +11,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>layout 管理系统大布局 - Layui</title>
+    <title>管理员列表</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/layui.css">
     <script src="${pageContext.request.contextPath}/static/js/jquery-3.6.0.js"></script>
     <script src="${pageContext.request.contextPath}/static/js/bootstrap.js"></script>
@@ -56,10 +56,9 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">管理员管理</a>
+                    <a class="" href="javascript:;">管理员</a>
                     <dl class="layui-nav-child">
                         <dd><a href="${pageContext.request.contextPath}/admin/queryAdmin">管理员列表</a></dd>
-                        <dd><a href="${pageContext.request.contextPath}/admin/queryAdmin">添加管理员</a></dd>
                     </dl>
                 </li>
 
@@ -103,15 +102,68 @@
         <!-- 内容主体区域 -->
         <div style="padding: 15px;">内容主体区域</div>
 
+        <div class="container">
+            <div class="row clearfix">
+                <div class="col-md-4 column" style="font-weight: lighter">管理员列表</div>
+                <div class="col-md-4 column"></div>
+                <div class="col-md-4 column">
+                    <%--搜索图书--%>
+                    <form class="form-inline" action="/books/searchBookByName" method="post"
+                          style="float: right;padding-bottom: 20px;">
+                        <input type="text" class="form-control" name="bookName" placeholder="请输入您所要查询教师的姓名"
+                               style="margin-left: 280px;">
+                        <input type="submit" value="查询" class="btn btn-success"
+                               style=" margin-right: 10px;margin-left: 500px;margin-top: -40px;border-right-width: 20px;padding-left: 20px;">
+                    </form>
+                </div>
+            </div>
 
-        <div class="layui-carousel" id="test1">
-            <div carousel-item>
-                <div><img src="/static/images/1.jpg"></div>
-                <div><img src="/static/images/2.jpg"></div>
-                <div><img src="/static/images/3.jpg"></div>
+
+            <div class="row clearfix">
+                <div class="col-md-12 column">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th>教师号</th>
+                            <th>姓名</th>
+                            <th>性别</th>
+                            <th>学院</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${teacherList.list}" var="teacher" varStatus="0">
+                            <tr>
+                                <td>${teacher.t_teacherid}</td>
+                                <td>${teacher.t_name}</td>
+                                <td>${teacher.t_sex}</td>
+                                <td>${teacher.t_department}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success"
+                                            onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
+                                    </button>
+                                    <button type="button" class="btn btn-danger"
+                                            onclick="deltea(${teacher.t_teacherid})">删除
+                                    </button>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-
+        当前第${teacherList.pageNum}页，共${teacherList.pages}页，共${teacherList.total}条记录
+        <br>
+        <a href="/admin/queryTeacher?start=0">首页</a>
+        <a href="/admin/queryTeacher?start=${teacherList.prePage}">上一页</a>
+        <c:forEach items="${teacherList.navigatepageNums}" var="pageNum">
+            <a href="/admin/queryTeacher?start=${pageNum*2-2}">${pageNum}</a>
+        </c:forEach>
+        <input type="text" id="searchtea" placeholder="请输入您想要查询的页码">
+        <button name="bts" onclick="searchTea()">查询</button>
+        <a href="/admin/queryTeacher?start=${teacherList.nextPage}">下一页</a>
+        <a href="/admin/queryTeacher?start=${teacherList.navigateLastPage}">尾页</a>
 
     </div>
 

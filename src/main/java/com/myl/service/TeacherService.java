@@ -4,6 +4,7 @@ import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,9 +21,13 @@ public interface TeacherService {
 
     int updateTeacher(Teacher teacher);
 
+    int deleteTeacher(String t_teacherid);
+
     Teacher queryTeacherByName(String t_name);
 
     List<Teacher> queryTeacher();
+
+    List<String> queryT_department();
 
 
 }

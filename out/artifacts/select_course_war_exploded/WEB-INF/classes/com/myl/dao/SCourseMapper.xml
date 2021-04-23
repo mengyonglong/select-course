@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myl.dao.SCourseMapper">
+
+
+    <insert id="selectCourse">
+        insert into choose_course.scourse(c_id,s_studentid,t_teacherid,c_status) values(#{c_id},#{s_studentid},#{t_teacherid},"已选")
+    </insert>
+
+    <delete id="deleteCourseByStudent">
+        delete from choose_course.scourse where s_studentid =#{s_studentid} and c_id =#{c_id}
+    </delete>
+
+    <select id="queryStudentOfTeacher" resultType="Student">
+        	 select * from choose_course.student where s_studentid in(
+					 select s_studentid from choose_course.scourse,choose_course.teacher where teacher.t_teacherid=scourse.t_teacherid and c_id =#{c_id})
+    </select>
+
+    <delete id="deleteCourseByTeacher">
+        delete from choose_course.scourse where sc_id =#{sc_id}
+    </delete>
+
+    <select id="queryNumber" resultType="java.lang.Integer">
+    select count(*) from (select * from student where s_studentid in(
+					 select s_studentid from scourse,teacher where teacher.t_teacherid=scourse.t_teacherid and c_id =#{c_id})) as a
+    </select>
+
+
+
+
+
+
+</mapper>
