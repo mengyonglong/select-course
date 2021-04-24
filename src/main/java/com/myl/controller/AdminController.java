@@ -9,6 +9,7 @@ import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
 import com.myl.service.*;
 import com.myl.utils.PageInfos;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class AdminController {
     @Resource
     private SCourseService sCourseService;
 
-
+    // 查询所有的管理员
     @RequestMapping("/queryAdmin")
     public String admin(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
@@ -70,7 +72,24 @@ public class AdminController {
     public String addAdmin(Admin admin) throws JsonProcessingException {
         adminService.addAdmin(admin);
 
-// 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
+        // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
+        ObjectMapper mapper = new ObjectMapper();
+        String string = mapper.writeValueAsString(admin);
+
+        return string;
+    }
+
+    // 去往修改管理员信息页面
+    @RequestMapping("/ToUpdateAdmin")
+    public String ToUpdateAdmin(){
+        return "admin/updateAdmin";
+    }
+    // 修改管理员信息
+    @ResponseBody
+    @RequestMapping("/updateAdmin")
+    public String updateAdmin(Admin admin) throws JsonProcessingException {
+        adminService.updateAdmin(admin);
+        // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
         ObjectMapper mapper = new ObjectMapper();
         String string = mapper.writeValueAsString(admin);
 
@@ -89,6 +108,7 @@ public class AdminController {
         return "admin/teacherList";
     }
 
+    // 删除教师
     @ResponseBody
     @RequestMapping("/deleteTeacher/{t_teacherid}")
     public String deleteTeacher(@PathVariable String t_teacherid) {
@@ -110,7 +130,6 @@ public class AdminController {
     @ResponseBody
     @RequestMapping("/addTeacher")
     public String addTeacher(Teacher teacher) throws JsonProcessingException {
-        System.out.println(teacher);
         teacherService.addTeacher(teacher);
 
         // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
@@ -120,14 +139,6 @@ public class AdminController {
         return string;
     }
 
-    @RequestMapping("/queryCourse")
-    public String queryCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model){
-        PageInfo pageInfo = PageInfos.queryCourse(start, courseService);
-
-        model.addAttribute("courseList",pageInfo);
-
-        return "admin/courseList";
-    }
 
     // 修改教师
     @RequestMapping("/updateTeacher/{teacher}")
@@ -161,6 +172,39 @@ public class AdminController {
 
         return "admin/studentcourse";
     }
+
+    @RequestMapping("/ToAddStudent")
+    public String ToAddStudent(Model model){
+        List<String> s_departmentList = teacherService.queryT_department();
+
+        model.addAttribute("s_departmentList", s_departmentList);
+        return "admin/addStudent";
+    }
+
+    // 添加学生
+    @ResponseBody
+    @RequestMapping("/addStudent")
+    public String addStudent(Student student) throws JsonProcessingException {
+        studentService.addStudent(student);
+
+        // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
+        ObjectMapper mapper = new ObjectMapper();
+        String string = mapper.writeValueAsString(student);
+
+        return string;
+
+    }
+
+    // 查询所有课程
+    @RequestMapping("/queryCourse")
+    public String queryCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model){
+        PageInfo pageInfo = PageInfos.queryCourse(start, courseService);
+
+        model.addAttribute("courseList",pageInfo);
+
+        return "admin/courseList";
+    }
+
 
 
 }

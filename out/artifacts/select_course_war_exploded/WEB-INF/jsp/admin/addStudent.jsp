@@ -2,21 +2,19 @@
 <%--
   Created by IntelliJ IDEA.
   User: 10254
-  Date: 2021/4/22
-  Time: 16:53
+  Date: 2021/4/24
+  Time: 16:55
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>添加管理员</title>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <title>layout 管理系统大布局 - Layui</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/layui.css">
-        <link rel="stylesheet" href="/static/css/bootstrap.css">
-    </head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 管理系统大布局 - Layui</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/layui.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+</head>
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
@@ -84,13 +82,15 @@
                     <dl class="layui-nav-child">
                         <dd><a href="${pageContext.request.contextPath}/admin/queryStudent">学生列表</a></dd>
                         <dd><a href="${pageContext.request.contextPath}/admin/ToAddStudent">添加学生</a></dd>
+
                     </dl>
                 </li>
 
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">个人信息管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">个人信息</a></dd>
+                        <dd><a href="/admin/ToUpdateAdmin">个人信息</a></dd>
+
                     </dl>
                 </li>
                 <li class="layui-nav-item"><a href="javascript:;">常见问题</a></li>
@@ -98,23 +98,16 @@
             </ul>
         </div>
     </div>
+
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">添加管理员</div>
+        <div style="padding: 15px;">内容主体区域</div>
 
         <form class="layui-form" id="addForm">
             <div class="layui-form-item">
-                <label class="layui-form-label">账号</label>
+                <label class="layui-form-label">学号</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a_username" required lay-verify="required" placeholder="请输入管理员账号"
-                           autocomplete="off" class="layui-input">
-                </div>
-            </div>
-
-            <div class="layui-form-item">
-                <label class="layui-form-label">密码</label>
-                <div class="layui-input-block">
-                    <input type="password" name="a_password" required lay-verify="required" placeholder="请输入密码"
+                    <input type="text" name="s_studentid" required lay-verify="required" placeholder="请输入学号"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -122,7 +115,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">姓名</label>
                 <div class="layui-input-block">
-                    <input type="text" name="a_name" required lay-verify="required" placeholder="请输入姓名"
+                    <input type="text" name="s_name" required lay-verify="required" placeholder="请输入学生姓名"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -130,22 +123,33 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">性别</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="a_sex" value="男" title="男" checked>
-                    <input type="radio" name="a_sex" value="女" title="女">
+                    <input type="radio" name="s_sex" value="男" title="男" checked>
+                    <input type="radio" name="s_sex" value="女" title="女">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <label class="layui-form-label">权限</label>
+                <label class="layui-form-label">年龄</label>
                 <div class="layui-input-block">
-                    <input type="radio" name="a_power" value="1" title="1">
-                    <input type="radio" name="a_power" value="0" title="0" checked>
+                    <input type="text" name="s_age" required lay-verify="required" placeholder="请输入年龄"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">学院</label>
+                <div class="layui-input-block">
+                    <select name="s_department" lay-verify="required">
+                        <c:forEach items="${s_departmentList}" var="s_department">
+                            <option value="${s_department}">${s_department}</option>
+                        </c:forEach>
+                    </select>
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <div class="layui-input-block">
-                    <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="addAdmin()">立即提交</button>
+                    <button class="layui-btn" lay-submit lay-filter="formDemo" onclick="addStudent()">立即提交</button>
                     <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                 </div>
             </div>
@@ -158,9 +162,9 @@
 <script src="${pageContext.request.contextPath}/static/js/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/static/js/layui.js"></script>
 <script type="text/javascript">
-    function addAdmin() {
+    function addStudent() {
         $.ajax({
-            url: "${pageContext.request.contextPath}/admin/addAdmin",
+            url: "${pageContext.request.contextPath}/admin/addStudent",
             type: 'post',
             dataType: "json",
             //  在这里进行form表单的序列化提交时，需要设置dataType为 "json",否则即使报200但是进error
@@ -168,7 +172,7 @@
             success: function (data) {
                 if (data !== "null") {
                     alert("添加成功");
-                    window.location.href = "${pageContext.request.contextPath}/admin/queryAdmin";
+                    window.location.href = "${pageContext.request.contextPath}/admin/queryStudent";
                 }
             }
         })
@@ -188,6 +192,7 @@
         });
     });
 </script>
+
 
 </body>
 </html>

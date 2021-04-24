@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myl.dao.TeacherMapper">
+
+    <select id="loginTeacher" parameterType="String" resultType="Teacher">
+        select * from choose_course.teacher where t_teacherid=#{t_teacherid} and t_password=#{t_password}
+    </select>
+
+    <insert id="addTeacher" parameterType="Teacher">
+        insert into choose_course.teacher(t_teacherid,t_name,t_sex,t_department)
+        values(#{t_teacherid},#{t_name},#{t_sex},#{t_department})
+    </insert>
+
+
+    <update id="updateTeacher" parameterType="Teacher">
+        update choose_course.teacher
+        set t_teacherid=#{t_teacherid},t_password=#{t_password},t_name=#{t_name},t_sex=#{t_sex},t_department=#{t_department}
+        where t_id = #{t_id}
+    </update>
+
+    <delete id="deleteTeacher" parameterType="String">
+        delete  from choose_course.teacher where t_teacherid =#{t_teacherid}
+    </delete>
+
+    <select id="queryTeacherByName" parameterType="String" resultType="Teacher">
+        select * from choose_course.teacher where t_name=#{t_name}
+    </select>
+
+    <select id="queryTeacher" resultType="Teacher">
+        select * from choose_course.teacher
+    </select>
+
+    <select id="queryT_department" resultType="String">
+        select DISTINCT t_department  from choose_course.teacher
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myl.dao.AdminMapper">
+    <select id="loginAdmin" parameterType="String" resultType="Admin">
+        select * from choose_course.admin where a_username=#{a_username} and a_password=#{a_password}
+    </select>
+
+    <insert id="addAdmin" parameterType="Admin">
+        insert into choose_course.admin(a_username,a_password,a_name,a_sex)
+        values(#{a_username},#{a_password},#{a_name},#{a_sex})
+    </insert>
+
+    <delete id="deleteAdminById" parameterType="int">
+        delete from choose_course.admin where a_id = #{a_id}
+    </delete>
+
+    <update id="updateAdmin" parameterType="Admin">
+        update choose_course.admin
+        set a_username=#{a_username},a_password=#{a_password},a_name=#{a_name},a_sex=#{a_sex},a_power=#{a_power}
+        where a_id = #{a_id}
+    </update>
+
+    <select id="queryAdminById" resultType="Admin">
+        select * from choose_course.admin where a_id =#{a_id}
+    </select>
+
+    <select id="queryAdmin" resultType="Admin">
+        select * from choose_course.admin
+    </select>
+
+
+</mapper>

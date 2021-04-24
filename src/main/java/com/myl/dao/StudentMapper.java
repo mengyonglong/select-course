@@ -24,4 +24,7 @@ public interface StudentMapper {
 
     // 修改学生信息
     Student updateStudent(Student student);
+
+    // 添加学生信息
+    int addStudent(Student student);
 }

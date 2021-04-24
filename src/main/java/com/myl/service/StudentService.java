@@ -20,4 +20,6 @@ public interface StudentService {
     Student queryStudentByName();
 
     Student updateStudent(Student student);
+
+    int addStudent(Student student);
 }
