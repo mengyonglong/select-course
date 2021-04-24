@@ -33,7 +33,10 @@ public interface TeacherMapper {
     // 查询所有教师
     List<Teacher> queryTeacher();
 
+    // 查询部门
     List<String> queryT_department();
+
+
 
 
 }

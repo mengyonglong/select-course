@@ -4,6 +4,24 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myl.dao.SCourseMapper">
 
+    <select id="queryStudentCourse" resultMap="StudentCourse">
+        	select * from choose_course.scourse,choose_course.course,choose_course.student
+        	  where scourse.s_studentid=student.s_studentid and course.c_id=scourse.c_id
+    </select>
+    <resultMap id="StudentCourse" type="Student">
+        <result property="s_studentid" column="s_studentid"></result>
+        <result property="s_name" column="s_name"></result>
+
+        <collection property="courses" ofType="Course">
+            <result property="c_id" column="c_id"></result>
+            <result property="c_name" column="c_name"></result>
+            <result property="c_credit" column="c_credit"></result>
+            <result property="c_place" column="c_place"></result>
+            <result property="c_properties" column="c_properties"></result>
+            <result property="t_name" column="t_name"></result>
+        </collection>
+    </resultMap>
+    
 
     <insert id="selectCourse">
         insert into choose_course.scourse(c_id,s_studentid,t_teacherid,c_status) values(#{c_id},#{s_studentid},#{t_teacherid},"已选")

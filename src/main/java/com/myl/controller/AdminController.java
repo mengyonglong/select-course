@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.myl.pojo.Admin;
+import com.myl.pojo.Course;
+import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
-import com.myl.service.AdminService;
-import com.myl.service.StudentService;
-import com.myl.service.TeacherService;
+import com.myl.service.*;
 import com.myl.utils.PageInfos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -42,47 +42,59 @@ public class AdminController {
     @Resource
     private StudentService studentService;
 
+    @Resource
+    private CourseService courseService;
+
+    @Resource
+    private SCourseService sCourseService;
+
 
     @RequestMapping("/queryAdmin")
-    public String admin(Model model){
+    public String admin(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
-        List<Admin> adminList = adminService.queryAdmin();
+        PageInfo pageInfo = PageInfos.queryAdmin(start, adminService);
 
-        model.addAttribute("adminList",adminList);
+        model.addAttribute("adminList", pageInfo);
 
-        return "admin/admin";
+        return "admin/adminList";
     }
 
+    // 去添加管理员页面
     @RequestMapping("ToAddAdmin")
-    public String ToAddAdmin(){
-        return "";
+    public String ToAddAdmin() {
+        return "admin/addAdmin";
     }
+
+    // 添加管理员
     @RequestMapping("/addAdmin")
-    public String addAdmin(Admin admin){
+    public String addAdmin(Admin admin) throws JsonProcessingException {
         adminService.addAdmin(admin);
 
-        return "redirect:admin/queryAdmin";
+// 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
+        ObjectMapper mapper = new ObjectMapper();
+        String string = mapper.writeValueAsString(admin);
+
+        return string;
     }
 
 
     // 查询所有教师
     @RequestMapping("/queryTeacher")
-    public String queryTeacher(@RequestParam(defaultValue = "1",value = "start")int start, Model model){
+    public String queryTeacher(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
         PageInfo pageInfo = PageInfos.queryTeacher(start, teacherService);
 
-        model.addAttribute("teacherList",pageInfo);
+        model.addAttribute("teacherList", pageInfo);
 
         return "admin/teacherList";
     }
 
     @ResponseBody
     @RequestMapping("/deleteTeacher/{t_teacherid}")
-    public String deleteTeacher(@PathVariable String t_teacherid){
-         teacherService.deleteTeacher(t_teacherid);
+    public String deleteTeacher(@PathVariable String t_teacherid) {
+        teacherService.deleteTeacher(t_teacherid);
         return "success";
     }
-
 
 
     //  进入到增加教师页面
@@ -90,7 +102,7 @@ public class AdminController {
     public String ToaddTeacher(Model model) {
         List<String> t_departmentList = teacherService.queryT_department();
 
-        model.addAttribute("t_departmentList",t_departmentList);
+        model.addAttribute("t_departmentList", t_departmentList);
         return "admin/addTeacher";
     }
 
@@ -108,9 +120,18 @@ public class AdminController {
         return string;
     }
 
+    @RequestMapping("/queryCourse")
+    public String queryCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model){
+        PageInfo pageInfo = PageInfos.queryCourse(start, courseService);
+
+        model.addAttribute("courseList",pageInfo);
+
+        return "admin/courseList";
+    }
+
     // 修改教师
     @RequestMapping("/updateTeacher/{teacher}")
-    public String updateTeacher(@PathVariable Teacher teacher){
+    public String updateTeacher(@PathVariable Teacher teacher) {
         teacherService.updateTeacher(teacher);
 
         return "admin/teacherList";
@@ -118,15 +139,27 @@ public class AdminController {
 
 
 
+
+
     // 查询学生
     @RequestMapping("/queryStudent")
-    public String queryStudent(@RequestParam(defaultValue = "1",value = "start")int start, Model model){
+    public String queryStudent(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
         PageInfo pageInfo = PageInfos.queryStudent(start, studentService);
 
-        model.addAttribute("studentList",pageInfo);
+        model.addAttribute("studentList", pageInfo);
 
         return "admin/studentList";
+    }
+
+    // 查询学生的选课信息
+    @RequestMapping("/queryStudentCourse")
+    public String queryStudentCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model){
+        PageInfo pageInfo = PageInfos.queryStudentCourse(start, sCourseService);
+
+        model.addAttribute("studentCourseList",pageInfo);
+
+        return "admin/studentcourse";
     }
 
 

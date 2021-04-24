@@ -24,4 +24,6 @@ public class Student {
     private int s_age;
     private String s_department;    //学院
 
+    private List<Course> courses;
+
 }

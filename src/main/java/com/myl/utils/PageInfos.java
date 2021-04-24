@@ -2,13 +2,11 @@ package com.myl.utils;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.myl.pojo.Admin;
 import com.myl.pojo.Course;
 import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
-import com.myl.service.CourseService;
-import com.myl.service.SCourseService;
-import com.myl.service.StudentService;
-import com.myl.service.TeacherService;
+import com.myl.service.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -67,6 +65,17 @@ public class PageInfos {
         return pageInfo;
     }
 
+    public static PageInfo queryCourse(int start, CourseService courseService){
+        PageHelper.startPage(start,total);
+
+        List<Course> courseList = courseService.queryCourse();
+        PageInfo pageInfo = new PageInfo(courseList);
+
+        return pageInfo;
+    }
+
+
+
     public static PageInfo queryStudentOfTeacher(int start,int c_id, SCourseService sCourseService){
         PageHelper.startPage(start,total);
 
@@ -76,5 +85,22 @@ public class PageInfos {
         return pageInfo;
     }
 
+    public static PageInfo queryAdmin(int start, AdminService adminService){
+        PageHelper.startPage(start,total);
+
+        List<Admin> adminList = adminService.queryAdmin();
+        PageInfo pageInfo = new PageInfo(adminList);
+
+        return pageInfo;
+    }
+
+    public static PageInfo queryStudentCourse(int start, SCourseService sCourseService){
+        PageHelper.startPage(start,total);
+
+        List<Student> studentList = sCourseService.queryStudentCourse();
+        PageInfo pageInfo = new PageInfo(studentList);
+
+        return pageInfo;
+    }
 
 }

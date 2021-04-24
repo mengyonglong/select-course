@@ -22,4 +22,6 @@ public interface SCourseService {
 
     int queryNumber(int c_id);
 
+    List<Student> queryStudentCourse();
+
 }

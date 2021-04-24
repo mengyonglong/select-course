@@ -59,7 +59,7 @@
                     <a class="" href="javascript:;">管理员管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="${pageContext.request.contextPath}/admin/queryAdmin">管理员列表</a></dd>
-                        <dd><a href="${pageContext.request.contextPath}/admin/queryAdmin">添加管理员</a></dd>
+                        <dd><a href="${pageContext.request.contextPath}/admin/ToAddAdmin">添加管理员</a></dd>
                     </dl>
                 </li>
 

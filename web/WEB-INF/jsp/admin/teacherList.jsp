@@ -38,16 +38,16 @@
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
                 <a href="javascript:;">
-                    <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg"
+                    <img src="/static/images/1.jpg"
                          class="layui-nav-img">
-                    tester
+                    ${sessionScope.admin.a_name}
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="">set 1</a></dd>
                     <dd><a href="">set 2</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item"><a href="">Sign out</a></li>
+            <li class="layui-nav-item"><a href="/logOut">注销</a></li>
         </ul>
     </div>
 
@@ -55,22 +55,38 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">管理员</a>
+                <li class="layui-nav-item ">
+                    <a class="" href="javascript:;">管理员管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="${pageContext.request.contextPath}/admin/queryAdmin">管理员列表</a></dd>
-                        <dd><a href="${pageContext.request.contextPath}/admin/queryStudent">学生管理</a></dd>
-                        <dd><a href="">课程管理</a></dd>
+                        <dd><a href="${pageContext.request.contextPath}/admin/ToAddAdmin">添加管理员</a></dd>
                     </dl>
                 </li>
 
-                <li class="layui-nav-item ">
-                    <a href="javascript:;">教师管理</a>
+                <li class="layui-nav-item  ">
+                    <a class="" href="javascript:;">教师管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="${pageContext.request.contextPath}/admin/queryTeacher">教师列表</a></dd>
                         <dd><a href="${pageContext.request.contextPath}/admin/ToaddTeacher">添加教师</a></dd>
                     </dl>
                 </li>
+
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">课程管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="/admin/queryCourse">教师开课</a></dd>
+                        <dd><a href="/admin/queryStudentCourse">学生选课</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item ">
+                    <a href="javascript:;">学生管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="${pageContext.request.contextPath}/admin/queryStudent">学生列表</a></dd>
+                        <dd><a href="">添加学生</a></dd>
+                    </dl>
+                </li>
+
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">个人信息管理</a>
                     <dl class="layui-nav-child">
@@ -82,7 +98,6 @@
             </ul>
         </div>
     </div>
-
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;"></div>
@@ -102,7 +117,6 @@
                     </form>
                 </div>
             </div>
-
 
             <div class="row clearfix">
                 <div class="col-md-12 column">
@@ -151,13 +165,13 @@
         <a href="/admin/queryTeacher?start=${teacherList.navigateLastPage}">尾页</a>
     </div>
 </div>
-</div>
+
 
 <div class="layui-footer">
     <!-- 底部固定区域 -->
     底部固定区域
 </div>
-</div>
+
 
 <script src="${pageContext.request.contextPath}/static/js/layui.js"></script>
 <script>

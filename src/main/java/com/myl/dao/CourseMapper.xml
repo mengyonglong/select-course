@@ -24,15 +24,16 @@
         select * from choose_course.course where c_id =#{c_id}
     </select>
 
+    <update id="updateCourse" parameterType="Course">
+        update choose_course.course set c_name=#{c_name},c_properties=#{c_properties},c_credit=#{c_credit},c_place=#{c_place} where c_id=#{c_id}
+    </update>
+
 
     <select id="queryTeacherCourse" resultMap="scourseMap">
               select * from choose_course.teacher,choose_course.course
                where course.t_teacherid = teacher.t_teacherid and teacher.t_teacherid=#{t_teacherid}
      </select>
 
-    <update id="updateCourse" parameterType="Course">
-        update choose_course.course set c_name=#{c_name},c_properties=#{c_properties},c_credit=#{c_credit},c_place=#{c_place} where c_id=#{c_id}
-    </update>
 
     <resultMap id="scourseMap" type="Teacher">
         <result  property="t_name" column="t_name"></result>

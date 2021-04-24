@@ -14,7 +14,11 @@ import java.util.List;
  */
 public interface SCourseMapper {
 
-    // 查询学生选课
+    // 查询所有学生选课
+    List<Student> queryStudentCourse();
+
+
+    // 查询单个学生选课
     int selectCourse(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid, @Param("t_teacherid") String t_teacherid);
 
     // 学生退课

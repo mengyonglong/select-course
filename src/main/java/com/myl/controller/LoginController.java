@@ -68,4 +68,21 @@ public class LoginController {
 
         return "null";
     }
+
+    @RequestMapping("/logOut")
+    public String logOut(HttpSession session){
+        if(session.getAttribute("admin")!=null){
+            session.removeAttribute("admin");
+            return "login";
+        }
+        if(session.getAttribute("teacher")!=null){
+            session.removeAttribute("teacher");
+            return "login";
+        }
+        if(session.getAttribute("student")!=null){
+            session.removeAttribute("student");
+            return "login";
+        }
+        return "";
+    }
 }

@@ -45,5 +45,10 @@ public class SCourseServiceImpl implements SCourseService {
         return scourseMapper.queryNumber(c_id);
     }
 
+    @Override
+    public List<Student> queryStudentCourse() {
+        return scourseMapper.queryStudentCourse();
+    }
+
 
 }
