@@ -73,5 +73,10 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.searchCourseByName(c_name);
     }
 
+    @Override
+    public List<Course> searchCourseOfTeacher(String t_name) {
+        return courseMapper.searchCourseOfTeacher(t_name);
+    }
+
 
 }

@@ -33,7 +33,8 @@ public interface CourseMapper {
      */
     Teacher queryTeacherCourse(String t_teacherid);
 
-    // 查看教师开设课程
+    // 查看教师所开设的课程
+    List<Course> searchCourseOfTeacher(String t_name);
 
 
     // 教师修改课程信息

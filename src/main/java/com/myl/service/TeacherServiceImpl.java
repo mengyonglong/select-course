@@ -46,9 +46,10 @@ public class TeacherServiceImpl implements TeacherService {
     }
 
     @Override
-    public Teacher queryTeacherByName(String t_name) {
+    public List<Teacher> queryTeacherByName(String t_name) {
         return teacherMapper.queryTeacherByName(t_name);
     }
+
 
     @Override
     public List<Teacher> queryTeacher() {

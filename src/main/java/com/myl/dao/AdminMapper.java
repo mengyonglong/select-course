@@ -26,8 +26,8 @@ public interface AdminMapper {
     // 修改管理员信息
     int updateAdmin(Admin admin);
 
-    // 通过管理员编号查找管理员
-    int queryAdminById(int a_id);
+    // 通过管理员姓名查找管理员
+    List<Admin> queryAdminByName(String a_name);
 
     // 查询所有的管理员
     List<Admin> queryAdmin();

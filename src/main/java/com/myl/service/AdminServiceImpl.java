@@ -45,9 +45,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int queryAdminById(int a_id) {
-        return adminMapper.queryAdminById(a_id);
+    public List<Admin> queryAdminByName(String a_name) {
+        return adminMapper.queryAdminByName(a_name);
     }
+
 
     @Override
     public List<Admin> queryAdmin() {

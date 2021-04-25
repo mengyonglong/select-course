@@ -57,6 +57,10 @@
             select * from choose_course.course where c_name like concat('%',#{c_name},'%') or c_properties like concat('%',#{c_name},'%')
     </select>
 
+    <select id="searchCourseOfTeacher" parameterType="String" resultType="Course">
+        select * from choose_course.course where t_name=#{t_name}
+    </select>
+
 
 
 </mapper>

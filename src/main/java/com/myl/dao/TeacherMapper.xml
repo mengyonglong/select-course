@@ -25,7 +25,7 @@
     </delete>
 
     <select id="queryTeacherByName" parameterType="String" resultType="Teacher">
-        select * from choose_course.teacher where t_name=#{t_name}
+        select * from choose_course.teacher where t_name like concat('%',#{t_name},'%') or t_department like concat('%',#{t_name},'%')
     </select>
 
     <select id="queryTeacher" resultType="Teacher">

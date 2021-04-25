@@ -23,7 +23,7 @@ public interface TeacherService {
 
     int deleteTeacher(String t_teacherid);
 
-    Teacher queryTeacherByName(String t_name);
+    List<Teacher> queryTeacherByName(String t_name);
 
     List<Teacher> queryTeacher();
 

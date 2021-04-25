@@ -28,7 +28,7 @@ public interface TeacherMapper {
     int deleteTeacher(String t_teacherid);
 
     // 通过教师姓名相关信息查询教师
-    Teacher queryTeacherByName(String t_name);
+    List<Teacher> queryTeacherByName(String t_name);
 
     // 查询所有教师
     List<Teacher> queryTeacher();

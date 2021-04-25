@@ -102,11 +102,11 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">学生选课</div>
+        <div style="padding: 15px;"></div>
 
         <div class="container">
             <div class="row clearfix">
-                <div class="col-md-4 column" style="font-weight: lighter">管理员列表</div>
+                <div class="col-md-4 column" style="font-weight: lighter">学生选课</div>
                 <div class="col-md-4 column"></div>
                 <div class="col-md-4 column">
                     <%--搜索图书--%>

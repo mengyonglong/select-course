@@ -108,9 +108,9 @@
                 <div class="col-md-4 column"></div>
                 <div class="col-md-4 column">
                     <%--搜索图书--%>
-                    <form class="form-inline" action="/books/searchBookByName" method="post"
+                    <form class="form-inline" action="/admin/searchTeacher" method="post"
                           style="float: right;padding-bottom: 20px;">
-                        <input type="text" class="form-control" name="bookName" placeholder="请输入您所要查询教师的姓名"
+                        <input type="text" class="form-control" name="t_name" placeholder="请输入您所要查询教师的姓名或者学院"
                                style="margin-left: 280px;">
                         <input type="submit" value="查询" class="btn btn-success"
                                style=" margin-right: 10px;margin-left: 500px;margin-top: -40px;border-right-width: 20px;padding-left: 20px;">
@@ -131,7 +131,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${teacherList.list}" var="teacher" varStatus="0">
+                        <c:if test="${teacherLists!=null}">
+                        <c:forEach items="${teacherLists.list}" var="teacher" varStatus="0">
                             <tr>
                                 <td>${teacher.t_teacherid}</td>
                                 <td>${teacher.t_name}</td>
@@ -154,34 +155,93 @@
         </div>
 
         <div style="padding: 15px;">
-            当前第${teacherList.pageNum}页，共${teacherList.pages}页，共${teacherList.total}条记录
+            当前第${teacherLists.pageNum}页，共${teacherLists.pages}页，共${teacherLists.total}条记录
             <br>
             <br>
             <div class="row" style="float: right">
                 <div class="form-inline">
-                    <button type="button" class="btn btn-dark" onclick="window.location.href='/admin/queryTeacher?start=0'">
+                    <button type="button" class="btn btn-dark"
+                            onclick="window.location.href='/admin/queryTeacher?start=0'">
                         首页
                     </button>
                     <button type="button" class="btn btn-dark"
-                            onclick="window.location.href='/admin/queryTeacher?start=${teacherList.prePage}'">上一页
+                            onclick="window.location.href='/admin/queryTeacher?start=${teacherLists.prePage}'">上一页
                     </button>
                     <c:forEach items="${teacherList.navigatepageNums}" var="pageNum">
                         <button type="button" class="btn btn-dark"
                                 onclick="window.location.href='/admin/queryTeacher?start=${pageNum*2-2}'">${pageNum}</button>
                     </c:forEach>
-                    <input class="form-control" type="text" style="width: auto" id="searchtea" placeholder="请输入您想要查询的页码">
+                    <input class="form-control" type="text" style="width: auto" id="searchtea"
+                           placeholder="请输入您想要查询的页码">
 
                     <button name="bts" type="button" class="btn btn-info" onclick="searchTea()">查询</button>
                     <button type="button" class="btn btn-dark"
-                            onclick="window.location.href='/admin/queryTeacher?start=${teacherList.nextPage}'">下一页
+                            onclick="window.location.href='/admin/queryTeacher?start=${teacherLists.nextPage}'">下一页
                     </button>
                     <button type="button" class="btn btn-dark"
-                            onclick="window.location.href='/admin/queryTeacher?start=${teacherList.navigateLastPage}'">尾页
+                            onclick="window.location.href='/admin/queryTeacher?start=${teacherLists.navigateLastPage}'">
+                        尾页
                     </button>
                 </div>
             </div>
         </div>
+        </c:if>
 
+        <c:if test="${teacherList!=null}">
+        <c:forEach items="${teacherList.list}" var="teacher" varStatus="0">
+            <tr>
+                <td>${teacher.t_teacherid}</td>
+                <td>${teacher.t_name}</td>
+                <td>${teacher.t_sex}</td>
+                <td>${teacher.t_department}</td>
+                <td>
+                    <button type="button" class="btn btn-success"
+                            onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
+                    </button>
+                    <button type="button" class="btn btn-danger"
+                            onclick="deltea(${teacher.t_teacherid})">删除
+                    </button>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+        </table>
+    </div>
+</div>
+</div>
+
+<div style="padding: 15px;">
+    当前第${teacherList.pageNum}页，共${teacherList.pages}页，共${teacherList.total}条记录
+    <br>
+    <br>
+    <div class="row" style="float: right">
+        <div class="form-inline">
+            <button type="button" class="btn btn-dark"
+                    onclick="window.location.href='/admin/searchTeacher?start=0&t_name=${t_name}'">
+                首页
+            </button>
+            <button type="button" class="btn btn-dark"
+                    onclick="window.location.href='/admin/searchTeacher?start=${teacherList.prePage}&t_name=${t_name}'">上一页
+            </button>
+            <c:forEach items="${teacherList.navigatepageNums}" var="pageNum">
+                <button type="button" class="btn btn-dark"
+                        onclick="window.location.href='/admin/searchTeacher?start=${pageNum*2-2}&t_name=${t_name}'">${pageNum}</button>
+            </c:forEach>
+            <input class="form-control" type="text" style="width: auto" id="searchtea"
+                   placeholder="请输入您想要查询的页码">
+
+            <button name="bts" type="button" class="btn btn-info" onclick="searchTea()">查询</button>
+            <button type="button" class="btn btn-dark"
+                    onclick="window.location.href='/admin/searchTeacher?start=${teacherList.nextPage}&t_name=${t_name}'">下一页
+            </button>
+            <button type="button" class="btn btn-dark"
+                    onclick="window.location.href='/admin/searchTeacher?start=${teacherList.navigateLastPage}&t_name=${t_name}'">
+                尾页
+            </button>
+        </div>
+    </div>
+</div>
+        </c:if>
     </div>
 </div>
 

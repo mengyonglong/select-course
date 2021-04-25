@@ -22,8 +22,8 @@
         where a_id = #{a_id}
     </update>
 
-    <select id="queryAdminById" resultType="Admin">
-        select * from choose_course.admin where a_id =#{a_id}
+    <select id="queryAdminByName" resultType="Admin">
+        select * from choose_course.admin where a_name like concat('%',#{a_name},'%')
     </select>
 
     <select id="queryAdmin" resultType="Admin">

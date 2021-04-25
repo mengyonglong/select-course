@@ -29,6 +29,15 @@ public class PageInfos {
         return pageInfo;
     }
 
+    public static PageInfo searchAdminByName(int start,String a_name, AdminService adminService){
+        PageHelper.startPage(start,total);
+
+        List<Admin> adminList = adminService.queryAdminByName(a_name);
+        PageInfo pageInfo = new PageInfo(adminList);
+
+        return pageInfo;
+    }
+
     public static PageInfo searchCourseByName(int start,String c_name, CourseService courseService){
         PageHelper.startPage(start,total);
         List<Course> courseList = courseService.searchCourseByName(c_name);
@@ -55,6 +64,17 @@ public class PageInfos {
 
         return pageInfo;
     }
+
+    public static PageInfo searchTeacherByName(int start,String t_name, TeacherService teacherService){
+        PageHelper.startPage(start,total);
+
+        List<Teacher> teacherList = teacherService.queryTeacherByName(t_name);
+        PageInfo pageInfo = new PageInfo(teacherList);
+
+        return pageInfo;
+    }
+
+
 
     public static PageInfo queryStudent(int start, StudentService studentService){
         PageHelper.startPage(start,total);
@@ -84,6 +104,17 @@ public class PageInfos {
 
         return pageInfo;
     }
+
+    public static PageInfo searchCourseOfTeacher(int start,String t_name, CourseService courseService){
+        PageHelper.startPage(start,total);
+
+        List<Course> courseList = courseService.searchCourseOfTeacher(t_name);
+        PageInfo pageInfo = new PageInfo(courseList);
+
+        return pageInfo;
+    }
+
+
 
     public static PageInfo queryAdmin(int start, AdminService adminService){
         PageHelper.startPage(start,total);

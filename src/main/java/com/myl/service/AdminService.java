@@ -21,7 +21,8 @@ public interface AdminService {
 
     int updateAdmin(Admin admin);
 
-    int queryAdminById(int a_id);
+    List<Admin> queryAdminByName(String a_name);
+
 
     List<Admin> queryAdmin();
 

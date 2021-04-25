@@ -39,14 +39,14 @@ public class TeacherController {
     }
 
     //  通过教师姓名查找教师
-    @RequestMapping("/queryme")
-    public String queryMe(String t_name, Model model) {
-        Teacher teacher = teacherService.queryTeacherByName(t_name);
-
-        model.addAttribute("teacher", teacher);
-
-        return "teacherme";
-    }
+//    @RequestMapping("/queryme")
+//    public String queryMe(String t_name, Model model) {
+//        Teacher teacher = teacherService.queryTeacherByName(t_name);
+//
+//        model.addAttribute("teacher", teacher);
+//
+//        return "teacherme";
+//    }
 
 
     //  进入到增加课程信息页面

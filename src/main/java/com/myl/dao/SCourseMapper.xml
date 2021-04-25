@@ -41,8 +41,7 @@
     </delete>
 
     <select id="queryNumber" resultType="java.lang.Integer">
-    select count(*) from (select * from student where s_studentid in(
-					 select s_studentid from scourse,teacher where teacher.t_teacherid=scourse.t_teacherid and c_id =#{c_id})) as a
+    		select count(*) from scourse where c_id = #{c_id}
     </select>
 
 

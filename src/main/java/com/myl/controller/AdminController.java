@@ -4,12 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageInfo;
 import com.myl.pojo.Admin;
-import com.myl.pojo.Course;
 import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
 import com.myl.service.*;
 import com.myl.utils.PageInfos;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -20,8 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
+import javax.jws.WebParam;
 import java.util.List;
 
 /**
@@ -56,7 +53,18 @@ public class AdminController {
 
         PageInfo pageInfo = PageInfos.queryAdmin(start, adminService);
 
-        model.addAttribute("adminList", pageInfo);
+        model.addAttribute("adminLists", pageInfo);
+
+        return "admin/adminList";
+    }
+
+    // 根据管理员姓名查询管理员
+    @RequestMapping("/searchAdmin")
+    public String searchAdmin(@RequestParam(defaultValue = "1", value = "start") int start,@RequestParam String a_name, Model model){
+        PageInfo pageInfo = PageInfos.searchAdminByName(start, a_name, adminService);
+
+        model.addAttribute("adminList",pageInfo);
+        model.addAttribute("a_name",a_name);
 
         return "admin/adminList";
     }
@@ -103,7 +111,18 @@ public class AdminController {
 
         PageInfo pageInfo = PageInfos.queryTeacher(start, teacherService);
 
-        model.addAttribute("teacherList", pageInfo);
+        model.addAttribute("teacherLists", pageInfo);
+
+        return "admin/teacherList";
+    }
+
+    // 通过教师名称或者学院搜索教师
+    @RequestMapping("/searchTeacher")
+    public String searchTeacher(@RequestParam(defaultValue = "1", value = "start") int start,@RequestParam String t_name, Model model){
+        PageInfo pageInfo = PageInfos.searchTeacherByName(start, t_name, teacherService);
+
+        model.addAttribute("teacherList",pageInfo);
+        model.addAttribute("t_name",t_name);
 
         return "admin/teacherList";
     }
@@ -200,7 +219,18 @@ public class AdminController {
     public String queryCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model){
         PageInfo pageInfo = PageInfos.queryCourse(start, courseService);
 
+        model.addAttribute("courseLists",pageInfo);
+
+        return "admin/courseList";
+    }
+
+    // 根据教师名字查询开课信息
+    @RequestMapping("/searchCourseOfTeacher")
+    public String searchCourseOfTeacher(@RequestParam(defaultValue = "1", value = "start") int start,@RequestParam String t_name, Model model){
+        PageInfo pageInfo = PageInfos.searchCourseOfTeacher(start, t_name, courseService);
+
         model.addAttribute("courseList",pageInfo);
+        model.addAttribute("t_name",t_name);
 
         return "admin/courseList";
     }
