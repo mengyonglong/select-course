@@ -23,6 +23,7 @@ public class Course {
     private String t_teacherid;
     private String c_place;
     private String t_name;
+    private int c_number;
 
    // private List<Student> students;
 }

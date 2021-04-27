@@ -29,6 +29,9 @@ public interface AdminMapper {
     // 通过管理员姓名查找管理员
     List<Admin> queryAdminByName(String a_name);
 
+    // 根据管理员ID查询管理员
+    Admin queryAdminById(int id);
+
     // 查询所有的管理员
     List<Admin> queryAdmin();
 

@@ -14,7 +14,7 @@ import java.util.List;
  */
 public interface SCourseService {
 
-    int selectCourse(int c_id,String s_studentid,String t_teacherid);
+    Boolean selectCourse(int c_id,String s_studentid,String t_teacherid);
 
     int deleteCourseByStudent(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid);
 
@@ -23,5 +23,7 @@ public interface SCourseService {
     int queryNumber(int c_id);
 
     List<Student> queryStudentCourse();
+
+    List<Integer> queryNumberOfTeacherCourse();
 
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
-import javax.jws.WebParam;
 import java.util.List;
 
 /**
@@ -87,11 +86,23 @@ public class AdminController {
         return string;
     }
 
+    // 管理员修改 管理员信息
+    @RequestMapping("/updateOtherAdmin/{a_id}")
+    public String updateOtherAdmin(@PathVariable int a_id,Model model){
+        System.out.println(a_id);
+        Admin admin = adminService.queryAdminById(a_id);
+
+        model.addAttribute("admin",admin);
+
+        return "admin/updateAdmin";
+    }
+
     // 去往修改管理员信息页面
     @RequestMapping("/ToUpdateAdmin")
     public String ToUpdateAdmin(){
         return "admin/updateAdmin";
     }
+
     // 修改管理员信息
     @ResponseBody
     @RequestMapping("/updateAdmin")
@@ -104,7 +115,14 @@ public class AdminController {
         return string;
     }
 
+    // 删除管理员
+    @ResponseBody
+    @RequestMapping("/deleteAdminById/{a_id}")
+    public String deleteAdminById(@PathVariable int a_id){
+        adminService.deleteAdminById(a_id);
 
+        return "success";
+    }
     // 查询所有教师
     @RequestMapping("/queryTeacher")
     public String queryTeacher(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
@@ -136,7 +154,7 @@ public class AdminController {
     }
 
 
-    //  进入到增加教师页面
+    // 进入到增加教师页面
     @RequestMapping("/ToaddTeacher")
     public String ToaddTeacher(Model model) {
         List<String> t_departmentList = teacherService.queryT_department();
@@ -221,6 +239,7 @@ public class AdminController {
 
         model.addAttribute("courseLists",pageInfo);
 
+
         return "admin/courseList";
     }
 
@@ -234,6 +253,8 @@ public class AdminController {
 
         return "admin/courseList";
     }
+
+
 
 
 

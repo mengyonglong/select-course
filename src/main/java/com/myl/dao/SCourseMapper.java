@@ -18,8 +18,9 @@ public interface SCourseMapper {
     List<Student> queryStudentCourse();
 
 
-    // 查询单个学生选课
+    // 学生选课
     int selectCourse(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid, @Param("t_teacherid") String t_teacherid);
+    int updateNumber(int c_id);
 
     // 学生退课
     int deleteCourseByStudent(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid);
@@ -30,8 +31,11 @@ public interface SCourseMapper {
     // 教师删除学生的选课
     int deleteCourseByTeacher(int sc_id);
 
-    // 查询教师开设课程的学生选课人数
+    // 查询指定教师开设课程的学生选课人数
     int queryNumber(int c_id);
+
+    // 查询所有教师开课的选课人数
+    List<Integer> queryNumberOfTeacherCourse();
 
 
 }

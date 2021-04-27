@@ -55,4 +55,9 @@ public class AdminServiceImpl implements AdminService {
 
         return adminMapper.queryAdmin();
     }
+
+    @Override
+    public Admin queryAdminById(int id) {
+        return adminMapper.queryAdminById(id);
+    }
 }

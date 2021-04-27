@@ -55,9 +55,16 @@ public class StudentController {
     @RequestMapping("/selectCourse")
     public String selectCourse(int c_id, String t_teacherid, HttpSession session) {
         Student student = (Student) session.getAttribute("student");
-        sCourseService.selectCourse(c_id, student.getS_studentid(), t_teacherid);
 
-        return "success";
+        try {
+            sCourseService.selectCourse(c_id, student.getS_studentid(), t_teacherid);
+
+            return "success";
+        }catch (Exception e){
+            System.out.println(e);
+            return "false";
+        }
+
     }
 
     // 学生退选课程

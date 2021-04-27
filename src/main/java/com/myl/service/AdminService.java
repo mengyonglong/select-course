@@ -26,4 +26,7 @@ public interface AdminService {
 
     List<Admin> queryAdmin();
 
+    Admin queryAdminById(int id);
+
+
 }

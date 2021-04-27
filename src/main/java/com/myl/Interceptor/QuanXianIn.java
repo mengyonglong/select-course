@@ -17,22 +17,35 @@ public class QuanXianIn implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        HttpSession session = request.getSession();
-        if (session.getAttribute("student") != null) {
-            if(request.getRequestURI().contains("teacher")){
-                response.sendRedirect("/quanxian.jsp");
-                return  false;
-            }
-            return true;
-        }
-        if (session.getAttribute("teacher") != null) {
-            if(request.getRequestURI().contains("admin")){
-                response.sendRedirect("/quanxian.jsp");
-                return  false;
-            }
-            return true;
-        }
-
+//        HttpSession session = request.getSession();
+//        if (session.getAttribute("student") != null) {
+//            if(!request.getRequestURI().contains("student")){
+//                response.sendRedirect("/quanxian.jsp");
+//
+//                return  false;
+//            }
+//            return true;
+//        }
+//        if (session.getAttribute("teacher") != null) {
+//            if(!request.getRequestURI().contains("teacher")){
+//                response.sendRedirect("/quanxian.jsp");
+//
+//
+//                return  false;
+//            }
+//            return true;
+//        }
+//
+//        if (session.getAttribute("admin") != null) {
+//            if(!request.getRequestURI().contains("admin")){
+//                response.sendRedirect("/quanxian.jsp");
+//
+//                return  false;
+//            }
+//            return true;
+//        }
+//
+//
 
         return true;
 

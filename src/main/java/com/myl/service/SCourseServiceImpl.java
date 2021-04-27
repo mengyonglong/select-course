@@ -3,6 +3,7 @@ package com.myl.service;
 import com.myl.dao.SCourseMapper;
 import com.myl.pojo.SCourse;
 import com.myl.pojo.Student;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,8 +27,14 @@ public class SCourseServiceImpl implements SCourseService {
 
 
     @Override
-    public int selectCourse(int c_id, String s_studentid, String t_teacherid) {
-        return scourseMapper.selectCourse(c_id,s_studentid,t_teacherid);
+    public Boolean selectCourse(int c_id, String s_studentid, String t_teacherid) {
+        int i = scourseMapper.selectCourse(c_id, s_studentid, t_teacherid);
+        int j = scourseMapper.updateNumber(c_id);
+        if(i>0&&j>0){
+            return true;
+        }else{
+            throw  new  RuntimeException("事务异常，开始回滚！");
+        }
     }
 
     @Override
@@ -48,6 +55,11 @@ public class SCourseServiceImpl implements SCourseService {
     @Override
     public List<Student> queryStudentCourse() {
         return scourseMapper.queryStudentCourse();
+    }
+
+    @Override
+    public List<Integer> queryNumberOfTeacherCourse() {
+        return scourseMapper.queryNumberOfTeacherCourse();
     }
 
 
