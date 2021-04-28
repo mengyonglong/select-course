@@ -29,5 +29,7 @@ public interface TeacherService {
 
     List<String> queryT_department();
 
+    Teacher queryTeacherById(String t_teacherid);
+
 
 }

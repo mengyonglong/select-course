@@ -36,6 +36,10 @@
         select DISTINCT t_department  from choose_course.teacher
     </select>
 
+    <select id="queryTeacherById" resultType="Teacher">
+        select * from choose_course.teacher where t_teacherid=#{t_teacherid}
+    </select>
+
 
 
 </mapper>

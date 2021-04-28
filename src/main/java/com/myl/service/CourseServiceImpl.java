@@ -78,5 +78,10 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.searchCourseOfTeacher(t_name);
     }
 
+    @Override
+    public List<String> queryNumberOfTeacherCourse() {
+        return courseMapper.queryNumberOfTeacherCourse();
+    }
+
 
 }

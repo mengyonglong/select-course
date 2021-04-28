@@ -43,6 +43,10 @@ public interface CourseMapper {
     // 教师查询指定课程
     Course queryCourseByTeacher(int c_id);
 
+    // 查询教师的开课数量
+    List<String> queryNumberOfTeacherCourse();
+
+
     // 学生查询自己所选的课程
     List<Course> queryCourseStudent(String s_studentid);
 

@@ -124,9 +124,10 @@
                                 <td>${teacher.t_name}</td>
                                 <td>${teacher.t_sex}</td>
                                 <td>${teacher.t_department}</td>
+
                                 <td>
                                     <button type="button" class="btn btn-success"
-                                            onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
+                                            onclick="window.location.href='/admin/ToUpdateTeacher/${teacher.t_teacherid}'">修改
                                     </button>
                                     <button type="button" class="btn btn-danger"
                                             onclick="deltea(${teacher.t_teacherid})">删除
@@ -179,7 +180,7 @@
                 <td>${teacher.t_department}</td>
                 <td>
                     <button type="button" class="btn btn-success"
-                            onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
+                            onclick="window.location.href='/admin/ToUpdateTeacher/${teacher.t_teacherid}'">修改
                     </button>
                     <button type="button" class="btn btn-danger"
                             onclick="deltea(${teacher.t_teacherid})">删除

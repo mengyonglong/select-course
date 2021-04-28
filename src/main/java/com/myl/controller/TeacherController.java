@@ -68,7 +68,7 @@ public class TeacherController {
 
     }
 
-    // 教师更新课程信息
+    // 教师修改课程信息
     @RequestMapping("/updateCourse")
     public String updateCourse(Course course){
         courseService.updateCourse(course);

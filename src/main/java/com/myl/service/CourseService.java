@@ -36,6 +36,8 @@ public interface CourseService {
 
     List<Course> searchCourseOfTeacher(String t_name);
 
+    List<String> queryNumberOfTeacherCourse();
+
 
 
 

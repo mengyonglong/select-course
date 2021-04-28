@@ -30,6 +30,9 @@ public interface TeacherMapper {
     // 通过教师姓名相关信息查询教师
     List<Teacher> queryTeacherByName(String t_name);
 
+    // 通过教师号查找具体教师
+    Teacher queryTeacherById(String t_teacherid);
+
     // 查询所有教师
     List<Teacher> queryTeacher();
 

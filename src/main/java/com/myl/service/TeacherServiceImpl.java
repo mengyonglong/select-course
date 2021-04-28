@@ -61,5 +61,10 @@ public class TeacherServiceImpl implements TeacherService {
         return teacherMapper.queryT_department();
     }
 
+    @Override
+    public Teacher queryTeacherById(String t_teacherid) {
+        return teacherMapper.queryTeacherById(t_teacherid);
+    }
+
 
 }

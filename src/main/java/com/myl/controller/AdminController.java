@@ -123,13 +123,16 @@ public class AdminController {
 
         return "success";
     }
+
+
     // 查询所有教师
     @RequestMapping("/queryTeacher")
     public String queryTeacher(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
         PageInfo pageInfo = PageInfos.queryTeacher(start, teacherService);
-
+        List<String> stringList = courseService.queryNumberOfTeacherCourse();
         model.addAttribute("teacherLists", pageInfo);
+        model.addAttribute("numberCourse", stringList);
 
         return "admin/teacherList";
     }
@@ -144,6 +147,8 @@ public class AdminController {
 
         return "admin/teacherList";
     }
+
+
 
     // 删除教师
     @ResponseBody
@@ -176,13 +181,31 @@ public class AdminController {
         return string;
     }
 
+    // 进入到修改教师页面
+    @RequestMapping("/ToUpdateTeacher/{t_teacherid}")
+    public String ToUpdateTeacher(@PathVariable String t_teacherid, Model model) {
+        Teacher teacher = teacherService.queryTeacherById(t_teacherid);
+        List<String> t_departmentList = teacherService.queryT_department();
+
+        model.addAttribute("teacher", teacher);
+        model.addAttribute("t_departmentList", t_departmentList);
+
+        return "admin/updateTeacher";
+    }
+
 
     // 修改教师
-    @RequestMapping("/updateTeacher/{teacher}")
-    public String updateTeacher(@PathVariable Teacher teacher) {
-        teacherService.updateTeacher(teacher);
+    @ResponseBody
+    @RequestMapping("/updateTeacher")
+    public String updateTeacher(Teacher teacher) throws JsonProcessingException {
+        System.out.println(teacher);
+        int i = teacherService.updateTeacher(teacher);
+        // 这里使用@RequestParam会报错500
+        // 这里通过form表单的序列化提交，返回值必须是JSON数据，这里将teacher封装成json数据返回
+        ObjectMapper mapper = new ObjectMapper();
+        String string = mapper.writeValueAsString(i);
 
-        return "admin/teacherList";
+        return string;
     }
 
 
