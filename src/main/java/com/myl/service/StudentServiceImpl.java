@@ -19,7 +19,7 @@ import java.util.List;
 
 @Repository(value = "StudentServiceImpl")
 public class StudentServiceImpl implements StudentService {
-@Autowired
+    @Autowired
     private StudentMapper studentMapper;
 
     public void setStudentMapper(StudentMapper studentMapper) {
@@ -28,7 +28,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student loginStudent(String s_studentid, String password) {
-        return studentMapper.loginStudent(s_studentid,password);
+        return studentMapper.loginStudent(s_studentid, password);
     }
 
     @Override
@@ -37,14 +37,21 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student queryStudentByid(int s_id) {
+        return studentMapper.queryStudentByid(s_id);
+    }
+
+
+    @Override
     public Student queryStudentByName() {
         return studentMapper.queryStudentByName();
     }
 
     @Override
-    public Student updateStudent(Student student) {
+    public int updateStudent(Student student) {
         return studentMapper.updateStudent(student);
     }
+
 
     @Override
     public int addStudent(Student student) {

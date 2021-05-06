@@ -19,6 +19,8 @@ public interface CourseMapper {
     // 教师退开所开设的课程
     int deleteCourseByTeacher(@Param("t_teacherid") String t_teacherid, @Param("c_id") int c_id);
     int deleteStudentOfCourse(int c_id);
+
+
     // 查询所有的课程
     List<Course> queryCourse();
 
@@ -40,6 +42,8 @@ public interface CourseMapper {
     // 教师修改课程信息
     int updateCourse(Course course);
 
+    int updateCourseOfAdmin(Course course);
+
     // 教师查询指定课程
     Course queryCourseByTeacher(int c_id);
 
@@ -52,6 +56,9 @@ public interface CourseMapper {
 
     // 学生根据课程名搜索相关课程
     List<Course> searchCourseByName(String c_name);
+
+    // 清空选课表数量置为0
+    int updateCourseNumber();
 
 
 }

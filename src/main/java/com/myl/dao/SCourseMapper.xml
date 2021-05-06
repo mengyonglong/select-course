@@ -33,6 +33,11 @@
          set c_number=c_number+1
           where c_id=#{c_id}
     </update>
+    <update id="reducenumber">
+        update choose_course.course
+         set c_number=c_number-1
+          where c_id=#{c_id}
+    </update>
 
     <delete id="deleteCourseByStudent">
         delete from choose_course.scourse where s_studentid =#{s_studentid} and c_id =#{c_id}
@@ -54,6 +59,29 @@
     <select id="queryNumberOfTeacherCourse" resultType="java.lang.Integer">
         select count(*) from scourse,course where course.c_id =scourse.c_id GROUP BY scourse.c_id
     </select>
+
+
+    <select id="queryCourseOfStudent" resultMap="StudentCourseList">
+       select student.s_studentid,student.s_name,course.c_id,c_name,c_credit,c_place,c_properties,t_name	from scourse,student,course where student.s_studentid = scourse.s_studentid and course.c_id=scourse.c_id and student.s_name like concat ('%',#{s_name},'%')
+
+    </select>
+    <resultMap id="StudentCourseList" type="Student">
+        <result property="s_studentid" column="s_studentid"></result>
+        <result property="s_name" column="s_name"></result>
+
+        <collection property="courses" ofType="Course">
+            <result property="c_id" column="c_id"></result>
+            <result property="c_name" column="c_name"></result>
+            <result property="c_credit" column="c_credit"></result>
+            <result property="c_place" column="c_place"></result>
+            <result property="c_properties" column="c_properties"></result>
+            <result property="t_name" column="t_name"></result>
+        </collection>
+    </resultMap>
+
+    <delete id="clearscourse">
+        delete from choose_course.scourse
+    </delete>
 
 
 </mapper>

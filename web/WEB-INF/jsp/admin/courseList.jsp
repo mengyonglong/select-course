@@ -62,7 +62,7 @@
                 <li class="layui-nav-item ">
                     <a href="javascript:;">课程管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="/admin/queryCourse">教师开课</a></dd>
+                        <dd><a href="/admin/queryCourse" >教师开课</a></dd>
                         <dd><a href="/admin/queryStudentCourse">学生选课</a></dd>
                     </dl>
                 </li>
@@ -97,7 +97,7 @@
                 <div class="col-md-4 column"></div>
                 <div class="col-md-4 column">
                     <%--搜索图书--%>
-                    <form class="form-inline" action="/admin/searchCourseOfTeacher" method="post"
+                    <form class="form-inline" action="/admin/searchCourseOfStudent" method="get"
                           style="float: right;padding-bottom: 20px;">
                         <input type="text" class="form-control" name="t_name" placeholder="请输入您所要查询教师的姓名"
                                style="margin-left: 280px;">
@@ -139,10 +139,10 @@
                                     <td>${course.c_number}</td>
                                     <td>
                                         <button type="button" class="btn btn-success"
-                                                onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
+                                                onclick="window.location.href='/admin/ToUpdateCourse/${course.c_id}'">修改
                                         </button>
                                         <button type="button" class="btn btn-danger"
-                                                onclick="deltea(${teacher.t_teacherid})">删除
+                                                onclick="delcou(${course.c_id},${course.t_teacherid})">删除
                                         </button>
                                     </td>
                                 </tr>
@@ -195,6 +195,7 @@
                 <td>${course.c_credit}</td>
                 <td>${course.t_name}</td>
                 <td>${course.c_place}</td>
+                <td>${course.c_number}</td>
                 <td>
                     <button type="button" class="btn btn-success"
                             onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
@@ -282,6 +283,23 @@
         var numtea = $('#searchcou').val() * 2 - 2;
         window.location.href = '${pageContext.request.contextPath}/admin/queryTeacher?start=' + numtea
 
+    }
+
+    function delcou(c_id,t_teacherid) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/admin/deleteCourseOfAdmin",
+            type: "post",
+            data: {
+                "t_teacherid": t_teacherid,
+                "c_id":c_id
+            },
+            success: function (data) {
+                if (data == "success") {
+                    alert("删除成功");
+                    window.location.href = "";
+                }
+            }
+        })
     }
 </script>
 

@@ -28,6 +28,10 @@
         update choose_course.course set c_name=#{c_name},c_properties=#{c_properties},c_credit=#{c_credit},c_place=#{c_place} where c_id=#{c_id}
     </update>
 
+    <update id="updateCourseOfAdmin" parameterType="Course">
+        update choose_course.course set c_name=#{c_name},c_properties=#{c_properties},c_credit=#{c_credit},c_place=#{c_place},t_name=#{t_name} where c_id=#{c_id}
+    </update>
+
 
     <select id="queryTeacherCourse" resultMap="scourseMap">
               select * from choose_course.teacher,choose_course.course
@@ -64,6 +68,10 @@
     <select id="queryNumberOfTeacherCourse" resultType="String">
      	select teacher.t_name,count(course.c_name) from course,teacher where teacher.t_teacherid=course.t_teacherid GROUP BY teacher.t_name
     </select>
+
+    <update id="updateCourseNumber">
+        update course set c_number = 0
+    </update>
 
 
 </mapper>

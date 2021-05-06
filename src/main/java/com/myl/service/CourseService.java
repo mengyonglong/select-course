@@ -38,6 +38,8 @@ public interface CourseService {
 
     List<String> queryNumberOfTeacherCourse();
 
+    int updateCourseOfAdmin(Course course);
+
 
 
 

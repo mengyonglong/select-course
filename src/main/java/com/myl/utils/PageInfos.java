@@ -134,4 +134,13 @@ public class PageInfos {
         return pageInfo;
     }
 
+    public static PageInfo searchCourseOfStudent(int start,String s_name, SCourseService sCourseService){
+        PageHelper.startPage(start,total);
+
+        List<Student> studentList = sCourseService.queryCourseOfStudent(s_name);
+        PageInfo pageInfo = new PageInfo(studentList);
+
+        return pageInfo;
+    }
+
 }

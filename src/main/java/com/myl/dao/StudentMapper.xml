@@ -19,6 +19,10 @@
         select * from choose_course.student where s_name=#{s_name}
     </select>
 
+    <select id="queryStudentByid"  resultType="Student">
+        select * from choose_course.student where s_id = #{s_id}
+    </select>
+
     <select id="queryStudent" resultType="Student">
         select * from choose_course.student
     </select>

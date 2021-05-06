@@ -17,9 +17,11 @@ public interface StudentService {
 
     List<Student> queryStudent();
 
+    Student queryStudentByid(int s_id);
+
     Student queryStudentByName();
 
-    Student updateStudent(Student student);
+    int updateStudent(Student student);
 
     int addStudent(Student student);
 }

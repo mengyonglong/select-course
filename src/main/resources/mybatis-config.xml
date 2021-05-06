@@ -28,6 +28,4 @@
         <mapper resource="com/myl/dao/SCourseMapper.xml"></mapper>
     </mappers>
 
-
-
 </configuration>

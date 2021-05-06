@@ -83,5 +83,10 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.queryNumberOfTeacherCourse();
     }
 
+    @Override
+    public int updateCourseOfAdmin(Course course) {
+        return courseMapper.updateCourseOfAdmin(course);
+    }
+
 
 }

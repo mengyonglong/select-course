@@ -1,5 +1,6 @@
 package com.myl.service;
 
+import com.myl.dao.CourseMapper;
 import com.myl.dao.SCourseMapper;
 import com.myl.pojo.SCourse;
 import com.myl.pojo.Student;
@@ -20,6 +21,8 @@ import java.util.List;
 public class SCourseServiceImpl implements SCourseService {
     @Autowired
     private SCourseMapper scourseMapper;
+    @Autowired
+    private CourseMapper courseMapper;
 
     public void setScourseMapper(SCourseMapper scourseMapper) {
         this.scourseMapper = scourseMapper;
@@ -38,8 +41,16 @@ public class SCourseServiceImpl implements SCourseService {
     }
 
     @Override
-    public int deleteCourseByStudent(int c_id, String s_studentid) {
-        return scourseMapper.deleteCourseByStudent(c_id,s_studentid);
+    public Boolean deleteCourseByStudent(int c_id, String s_studentid) {
+        int i = scourseMapper.deleteCourseByStudent(c_id,s_studentid);
+        int j = scourseMapper.reducenumber(c_id);
+        if(i>0&&j>0){
+            return true;
+        }else{
+            throw  new  RuntimeException("事务异常，开始回滚！");
+        }
+
+
     }
 
     @Override
@@ -62,5 +73,21 @@ public class SCourseServiceImpl implements SCourseService {
         return scourseMapper.queryNumberOfTeacherCourse();
     }
 
+    @Override
+    public List<Student> queryCourseOfStudent(String s_name) {
+        return scourseMapper.queryCourseOfStudent(s_name);
+    }
 
+    @Override
+    public Boolean clearscourse() {
+        int i = scourseMapper.clearscourse();
+        int j = courseMapper.updateCourseNumber();
+
+        if(i>0&&j>0){
+            return true;
+        }else{
+            throw  new  RuntimeException("事务异常，开始回滚！");
+        }
+
+    }
 }

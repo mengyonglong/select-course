@@ -16,7 +16,7 @@ public interface SCourseService {
 
     Boolean selectCourse(int c_id,String s_studentid,String t_teacherid);
 
-    int deleteCourseByStudent(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid);
+    Boolean deleteCourseByStudent(@Param("c_id") int c_id, @Param("s_studentid") String s_studentid);
 
     List<Student> queryStudentOfTeacher(int c_id);
 
@@ -25,5 +25,10 @@ public interface SCourseService {
     List<Student> queryStudentCourse();
 
     List<Integer> queryNumberOfTeacherCourse();
+
+    List<Student> queryCourseOfStudent(String s_name);
+
+    Boolean clearscourse();
+
 
 }

@@ -92,13 +92,19 @@
         <div class="container">
             <div class="row clearfix">
                 <div class="col-md-4 column" style="font-weight: lighter">学生选课</div>
-                <div class="col-md-4 column"></div>
+                <div class="col-md-4 column">
+                    <button type="button" class="btn btn-danger"
+                            onclick="clearstucou()">清空选课信息
+                    </button>
+                </div>
                 <div class="col-md-4 column">
                     <%--搜索图书--%>
-                    <form class="form-inline" action="/books/searchBookByName" method="post"
+                    <form class="form-inline" action="/admin/searchCourseOfStudent" method="get"
                           style="float: right;padding-bottom: 20px;">
-                        <input type="text" class="form-control" name="bookName" placeholder="请输入您所要查询管理员的姓名"
-                               style="margin-left: 280px;">
+                        <label>
+                            <input type="text" class="form-control" name="s_name" placeholder="请输入您所要查询学生的姓名"
+                                   style="margin-left: 280px;">
+                        </label>
                         <input type="submit" value="查询" class="btn btn-success"
                                style=" margin-right: 10px;margin-left: 500px;margin-top: -40px;border-right-width: 20px;padding-left: 20px;">
                     </form>
@@ -123,6 +129,8 @@
                         </tr>
                         </thead>
                         <tbody>
+
+                        <c:if test="${studentCourseList!=null}">
                         <c:forEach items="${studentCourseList.list}" var="student" varStatus="0">
                             <c:forEach items="${student.courses}" var="Course">
                                 <tr>
@@ -135,11 +143,8 @@
                                     <td>${Course.c_properties}</td>
                                     <td>${Course.t_name}</td>
                                     <td>
-                                        <button type="button" class="btn btn-success"
-                                                onclick="window.location.href='/admin/updateTeacher/${teacher}'">修改
-                                        </button>
                                         <button type="button" class="btn btn-danger"
-                                                onclick="deltea(${teacher.t_teacherid})">删除
+                                                onclick="delstucou(${Course.c_id},${student.s_studentid})">删除
                                         </button>
                                     </td>
                                 </tr>
@@ -168,7 +173,8 @@
                         <button type="button" class="btn btn-dark"
                                 onclick="window.location.href='/admin/queryStudentCourse?start=${pageNum*2-2}'">${pageNum}</button>
                     </c:forEach>
-                    <input class="form-control" type="text" style="width: auto" id="searchtea" placeholder="请输入您想要查询的页码">
+                    <input class="form-control" type="text" style="width: auto" id="searchtea"
+                           placeholder="请输入您想要查询的页码">
                     <button name="bts" type="button" class="btn btn-info" onclick="searchTea()">查询</button>
                     <button type="button" class="btn btn-dark"
                             onclick="window.location.href='/admin/queryStudentCourse?start=${studentCourseList.nextPage}'">
@@ -181,9 +187,70 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
+</c:if>
+
+<c:if test="${stringlist!=null}">
+    <c:forEach items="${stringlist.list}" var="student" varStatus="0">
+        <c:forEach items="${student.courses}" var="Course">
+            <tr>
+                <td>${student.s_studentid}</td>
+                <td>${student.s_name}</td>
+                <td>${Course.c_id}</td>
+                <td>${Course.c_name}</td>
+                <td>${Course.c_credit}</td>
+                <td>${Course.c_place}</td>
+                <td>${Course.c_properties}</td>
+                <td>${Course.t_name}</td>
+                <td>
+                    <button type="button" class="btn btn-danger"
+                            onclick="deltea(${teacher.t_teacherid})">删除
+                    </button>
+                </td>
+            </tr>
+        </c:forEach>
+    </c:forEach>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+
+    <div style="padding: 15px;">
+        当前第${studentCourseList.pageNum}页，共${studentCourseList.pages}页，共${studentCourseList.total}条记录
+        <br>
+        <br>
+        <div class="row" style="float: right">
+            <div class="form-inline">
+                <button type="button" class="btn btn-dark"
+                        onclick="window.location.href='/admin/queryStudentCourse?start=0'">首页
+                </button>
+                <button type="button" class="btn btn-dark"
+                        onclick="window.location.href='/admin/queryStudentCourse?start=${studentCourseList.prePage}'">
+                    上一页
+                </button>
+                <c:forEach items="${studentCourseList.navigatepageNums}" var="pageNum">
+                    <button type="button" class="btn btn-dark"
+                            onclick="window.location.href='/admin/queryStudentCourse?start=${pageNum*2-2}'">${pageNum}</button>
+                </c:forEach>
+                <input class="form-control" type="text" style="width: auto" id="searchtea" placeholder="请输入您想要查询的页码">
+                <button name="bts" type="button" class="btn btn-info" onclick="searchTea()">查询</button>
+                <button type="button" class="btn btn-dark"
+                        onclick="window.location.href='/admin/queryStudentCourse?start=${studentCourseList.nextPage}'">
+                    下一页
+                </button>
+                <button type="button" class="btn btn-dark"
+                        onclick="window.location.href='/admin/queryStudentCourse?start=${studentCourseList.navigateLastPage}'">
+                    尾页
+                </button>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</c:if>
+
 
 <div class="layui-footer">
     <!-- 底部固定区域 -->
@@ -211,6 +278,38 @@
             , interval: '3000'
         });
     });
+</script>
+<script>
+
+    function clearstucou() {
+            $.ajax({
+                url:"${pageContext.request.contextPath}/admin/clearscourse",
+                type:"post",
+                data:{},
+                success:function (data) {
+                    if (data == "success") {
+                        alert("清空成功");
+                        window.location.href = "";
+                    }
+                }
+            })
+    }
+    function delstucou(c_id,s_studentid) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/admin/deleteStudentCourseOfAdmin",
+            type: "post",
+            data: {
+                "s_studentid": s_studentid,
+                "c_id":c_id
+            },
+            success: function (data) {
+                if (data == "success") {
+                    alert("删除成功");
+                    window.location.href = "";
+                }
+            }
+        })
+    }
 </script>
 </body>
 </html>
