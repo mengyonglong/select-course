@@ -4,6 +4,7 @@ import com.myl.pojo.Course;
 import com.myl.pojo.Student;
 import com.myl.pojo.Teacher;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -39,6 +40,11 @@ public interface CourseService {
     List<String> queryNumberOfTeacherCourse();
 
     int updateCourseOfAdmin(Course course);
+
+    List<String> queryCProperties();
+
+    List<Course> searchChooseCourse(@Param("s_studentid") String s_studentid,@Param("c_name") String c_name);
+
 
 
 

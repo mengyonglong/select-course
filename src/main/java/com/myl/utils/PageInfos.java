@@ -143,4 +143,25 @@ public class PageInfos {
         return pageInfo;
     }
 
+    public static PageInfo searchStudent(int start,String s_name, StudentService studentService){
+        PageHelper.startPage(start,total);
+
+        List<Student> studentList = studentService.queryStudentByName(s_name);
+        PageInfo pageInfo = new PageInfo(studentList);
+
+        return pageInfo;
+    }
+    public static PageInfo searchChooseCourse(int start,String s_studentid,String c_name, CourseService courseService){
+        PageHelper.startPage(start,total);
+
+        List<Course> courseList = courseService.searchChooseCourse(s_studentid,c_name);
+        PageInfo pageInfo = new PageInfo(courseList);
+
+        return pageInfo;
+    }
+
+
+
+
+
 }

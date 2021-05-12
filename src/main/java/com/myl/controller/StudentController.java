@@ -50,6 +50,9 @@ public class StudentController {
         return "student/studentCourse";
     }
 
+
+
+
     // 学生选课
     @ResponseBody
     @RequestMapping("/selectCourse")
@@ -76,9 +79,9 @@ public class StudentController {
         return "success";
     }
 
-    // 搜索查询
+    // 搜索查询课程
     @RequestMapping("/searchCourse")
-    public String queryCourse(@RequestParam(defaultValue = "1",value = "start")int start,@RequestParam(value = "c_name")String c_name, Model model){
+    public String queryCourse(@RequestParam(defaultValue = "1",value = "start")int start,@RequestParam String c_name, Model model){
         PageInfo pageInfo = PageInfos.searchCourseByName(start,c_name, courseService);
 
         model.addAttribute("courseList",pageInfo);
@@ -87,6 +90,26 @@ public class StudentController {
         return "student/courseList";
     }
 
+    /**
+     * 学生搜索查询已选课程
+     */
+    @RequestMapping("searchChooseCourse")
+    public String searchChooseCourse(@RequestParam(defaultValue = "1",value = "start")int start,@RequestParam String c_name,HttpSession session, Model model){
+        Student student = (Student) session.getAttribute("student");
+
+        PageInfo pageInfo = PageInfos.searchChooseCourse(start, student.getS_studentid(), c_name, courseService);
+
+        model.addAttribute("courseList",pageInfo);
+        model.addAttribute("c_name",c_name);
+        return "student/studentCourse";
+
+
+    }
+
+    @RequestMapping("/ToQueryMe")
+    public String ToQueryMe(){
+        return "student/QueryMe";
+    }
 
 
 

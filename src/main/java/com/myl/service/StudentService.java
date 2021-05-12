@@ -19,7 +19,7 @@ public interface StudentService {
 
     Student queryStudentByid(int s_id);
 
-    Student queryStudentByName();
+    List<Student> queryStudentByName(String s_name);
 
     int updateStudent(Student student);
 

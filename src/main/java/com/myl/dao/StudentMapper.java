@@ -19,10 +19,11 @@ public interface StudentMapper {
     // 查询所有学生
     List<Student> queryStudent();
 
+    // 通过学号查询学生
     Student queryStudentByid(int s_id);
 
     // 通过学生姓名相关信息查询学生
-    Student queryStudentByName();
+    List<Student> queryStudentByName(String s_name);
 
     // 修改学生信息
     int updateStudent(Student student);

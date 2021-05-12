@@ -4,6 +4,9 @@ import com.myl.pojo.Course;
 import com.myl.pojo.Teacher;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultMap;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -35,7 +38,7 @@ public interface CourseMapper {
      */
     Teacher queryTeacherCourse(String t_teacherid);
 
-    // 查看教师所开设的课程
+    // 搜索教师所开设的课程
     List<Course> searchCourseOfTeacher(String t_name);
 
 
@@ -60,5 +63,22 @@ public interface CourseMapper {
     // 清空选课表数量置为0
     int updateCourseNumber();
 
+    /**
+     * 查询课程属性列表
+     */
+    @Select("select DISTINCT c_properties  from course ")
+    List<String> queryC_Properties();
+
+    /**
+     * 学生搜索查询自己所选的课程
+     * @param s_studentid
+     * @param c_name
+     * @return
+     */
+   @Select(" select * from (select * from course where c_id in\n" +
+           "                            (select c_id from  choose_course.scourse where s_studentid=#{s_studentid})) as a\n" +
+           " where c_name like  concat('%',#{c_name},'%')")
+
+    List<Course> searchChooseCourse(@Param("s_studentid") String s_studentid,@Param("c_name") String c_name);
 
 }

@@ -49,7 +49,12 @@ public class AdminController {
     @Resource
     private SCourseService sCourseService;
 
-    // 查询所有的管理员
+    /**
+     * 查询所有的管理员
+     * @param start
+     * @param model
+     * @return
+     */
     @RequestMapping("/queryAdmin")
     public String admin(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
@@ -60,7 +65,13 @@ public class AdminController {
         return "admin/adminList";
     }
 
-    // 根据管理员姓名查询管理员
+    /**
+     * 根据管理员姓名查询管理员
+     * @param start
+     * @param a_name
+     * @param model
+     * @return
+     */
     @RequestMapping("/searchAdmin")
     public String searchAdmin(@RequestParam(defaultValue = "1", value = "start") int start, @RequestParam String a_name, Model model) {
         PageInfo pageInfo = PageInfos.searchAdminByName(start, a_name, adminService);
@@ -71,13 +82,21 @@ public class AdminController {
         return "admin/adminList";
     }
 
-    // 去添加管理员页面
+    /**
+     * 去添加管理员页面
+     * @return
+     */
     @RequestMapping("ToAddAdmin")
     public String ToAddAdmin() {
         return "admin/addAdmin";
     }
 
-    // 添加管理员
+    /**
+     * 添加管理员
+     * @param admin
+     * @return
+     * @throws JsonProcessingException
+     */
     @RequestMapping("/addAdmin")
     public String addAdmin(Admin admin) throws JsonProcessingException {
         adminService.addAdmin(admin);
@@ -89,7 +108,12 @@ public class AdminController {
         return string;
     }
 
-    // 管理员修改 管理员信息
+    /**
+     * 管理员修改管理员信息
+      * @param a_id
+     * @param model
+     * @return
+     */
     @RequestMapping("/updateOtherAdmin/{a_id}")
     public String updateOtherAdmin(@PathVariable int a_id, Model model) {
         System.out.println(a_id);
@@ -100,13 +124,21 @@ public class AdminController {
         return "admin/updateAdmin";
     }
 
-    // 去往修改管理员信息页面
+    /**
+     * 去往修改管理员信息页面
+     * @return
+     */
     @RequestMapping("/ToUpdateAdmin")
-    public String ToUpdateAdmin() {
+    public String toUpdateAdmin() {
         return "admin/updateAdmin";
     }
 
-    // 修改管理员信息
+    /**
+     * 修改管理员信息
+     * @param admin
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/updateAdmin")
     public String updateAdmin(Admin admin) throws JsonProcessingException {
@@ -118,7 +150,11 @@ public class AdminController {
         return string;
     }
 
-    // 删除管理员
+    /**
+     * 删除管理员
+     * @param a_id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteAdminById/{a_id}")
     public String deleteAdminById(@PathVariable int a_id) {
@@ -128,7 +164,12 @@ public class AdminController {
     }
 
 
-    // 查询所有教师
+    /**
+     * 查询所有教师
+     * @param start
+     * @param model
+     * @return
+     */
     @RequestMapping("/queryTeacher")
     public String queryTeacher(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
@@ -140,7 +181,13 @@ public class AdminController {
         return "admin/teacherList";
     }
 
-    // 通过教师名称或者学院搜索教师
+    /**
+     * 通过教师名称或者学院搜索教师
+     * @param start
+     * @param t_name
+     * @param model
+     * @return
+     */
     @RequestMapping("/searchTeacher")
     public String searchTeacher(@RequestParam(defaultValue = "1", value = "start") int start, @RequestParam String t_name, Model model) {
         PageInfo pageInfo = PageInfos.searchTeacherByName(start, t_name, teacherService);
@@ -152,7 +199,11 @@ public class AdminController {
     }
 
 
-    // 删除教师
+    /**
+     * 进入到增加教师页面
+     * @param t_teacherid
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteTeacher/{t_teacherid}")
     public String deleteTeacher(@PathVariable String t_teacherid) {
@@ -161,16 +212,25 @@ public class AdminController {
     }
 
 
-    // 进入到增加教师页面
+    /**
+     * 进入到增加教师页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/ToaddTeacher")
-    public String ToaddTeacher(Model model) {
+    public String toaddTeacher(Model model) {
         List<String> t_departmentList = teacherService.queryT_department();
 
         model.addAttribute("t_departmentList", t_departmentList);
         return "admin/addTeacher";
     }
 
-    // 添加教师
+    /**
+     * 添加教师
+      * @param teacher
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/addTeacher")
     public String addTeacher(Teacher teacher) throws JsonProcessingException {
@@ -183,9 +243,14 @@ public class AdminController {
         return string;
     }
 
-    // 进入到修改教师页面
+    /**
+     * 进入到修改教师页面
+     * @param t_teacherid
+     * @param model
+     * @return
+     */
     @RequestMapping("/ToUpdateTeacher/{t_teacherid}")
-    public String ToUpdateTeacher(@PathVariable String t_teacherid, Model model) {
+    public String toUpdateTeacher(@PathVariable String t_teacherid, Model model) {
         Teacher teacher = teacherService.queryTeacherById(t_teacherid);
         List<String> t_departmentList = teacherService.queryT_department();
 
@@ -196,7 +261,12 @@ public class AdminController {
     }
 
 
-    // 修改教师
+    /**
+     * 查询所有学生
+     * @param teacher
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/updateTeacher")
     public String updateTeacher(Teacher teacher) throws JsonProcessingException {
@@ -211,18 +281,44 @@ public class AdminController {
     }
 
 
-    // 查询学生
+    /**
+     * 查询所有学生
+     * @param start
+     * @param model
+     * @return
+     */
     @RequestMapping("/queryStudent")
     public String queryStudent(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
 
         PageInfo pageInfo = PageInfos.queryStudent(start, studentService);
 
-        model.addAttribute("studentList", pageInfo);
+        model.addAttribute("studentLists", pageInfo);
 
         return "admin/studentList";
     }
 
-    // 查询学生的选课信息
+    /**
+     * 搜索查询学生
+     * @param start
+     * @param s_name
+     * @param model
+     * @return
+     */
+    @RequestMapping("/searchStudent")
+    public String searchStudent(@RequestParam(defaultValue = "1", value = "start") int start,@RequestParam String s_name, Model model){
+        PageInfo pageInfo = PageInfos.searchStudent(start, s_name, studentService);
+
+        model.addAttribute("studentList",pageInfo);
+        model.addAttribute("s_name",s_name);
+        return "admin/studentList";
+    }
+
+    /**
+     * 查询学生的选课信息
+     * @param start
+     * @param model
+     * @return
+     */
     @RequestMapping("/queryStudentCourse")
     public String queryStudentCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
         PageInfo pageInfo = PageInfos.queryStudentCourse(start, sCourseService);
@@ -232,16 +328,25 @@ public class AdminController {
         return "admin/studentcourse";
     }
 
-    //去往添加学生页面
+    /**
+     * 去往添加学生页面
+     * @param model
+     * @return
+     */
     @RequestMapping("/ToAddStudent")
-    public String ToAddStudent(Model model) {
+    public String toAddStudent(Model model) {
         List<String> s_departmentList = teacherService.queryT_department();
 
         model.addAttribute("s_departmentList", s_departmentList);
         return "admin/addStudent";
     }
 
-    // 添加学生
+    /**
+     * 添加学生
+     * @param student
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/addStudent")
     public String addStudent(Student student) throws JsonProcessingException {
@@ -255,18 +360,28 @@ public class AdminController {
 
     }
 
-    // 去往修改学生信息页面
+    /**
+     * 去往修改学生信息页面
+     * @param s_id
+     * @param model
+     * @return
+     */
     @RequestMapping("/ToUpdateStudent/{s_id}")
-    public String ToUpdateStudent(@PathVariable int s_id,Model model){
-        List<String> t_departmentList = teacherService.queryT_department();
+    public String toUpdateStudent(@PathVariable int s_id, Model model){
+        List<String> tDepartmentList = teacherService.queryT_department();
         Student student = studentService.queryStudentByid(s_id);
-        model.addAttribute("t_departmentList",t_departmentList);
+        model.addAttribute("t_departmentList",tDepartmentList);
         model.addAttribute("student",student);
 
         return "admin/updateStudent";
     }
 
-    // 修改学生信息
+    /**
+     * 修改学生信息
+     * @param student
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/updateStudent")
     public String updateStudent(Student student) throws JsonProcessingException {
@@ -279,17 +394,28 @@ public class AdminController {
         return string;
     }
 
-    // 查询指定学生的选课信息
+    /**
+     * 查询指定学生的选课信息
+     * @param start
+     * @param c_name
+     * @param model
+     * @return
+     */
     @RequestMapping("/searchCourseOfStudent")
-    public String searchCourseOfStudent(@RequestParam(defaultValue = "1", value = "start") int start, @RequestParam String s_name, Model model) {
-        PageInfo pageInfo = PageInfos.searchCourseOfStudent(start, s_name, sCourseService);
+    public String searchCourseOfStudent(@RequestParam(defaultValue = "1", value = "start") int start, @RequestParam String c_name, Model model) {
+        PageInfo pageInfo = PageInfos.searchCourseOfStudent(start, c_name, sCourseService);
 
         model.addAttribute("stringlist", pageInfo);
 
         return "admin/studentcourse";
     }
 
-    // 删除学生的选课信息
+    /**
+     * 删除学生的选课信息
+     * @param s_studentid
+     * @param c_id
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteStudentCourseOfAdmin")
     public String deleteStudentCourseOfAdmin(@RequestParam String s_studentid, @RequestParam int c_id) {
@@ -298,7 +424,10 @@ public class AdminController {
         return "success";
     }
 
-    // 清空选课信息
+    /**
+     * 清空选课信息
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/clearscourse")
     public String clearscourse() {
@@ -308,7 +437,12 @@ public class AdminController {
     }
 
 
-    // 查询所有课程
+    /**
+     * 查询所有课程
+     * @param start
+     * @param model
+     * @return
+     */
     @RequestMapping("/queryCourse")
     public String queryCourse(@RequestParam(defaultValue = "1", value = "start") int start, Model model) {
         PageInfo pageInfo = PageInfos.queryCourse(start, courseService);
@@ -319,7 +453,13 @@ public class AdminController {
         return "admin/courseList";
     }
 
-    // 根据教师名字查询开课信息
+    /**
+     * 根据教师名字查询开课信息
+     * @param start
+     * @param t_name
+     * @param model
+     * @return
+     */
     @RequestMapping("/searchCourseOfTeacher")
     public String searchCourseOfTeacher(@RequestParam(defaultValue = "1", value = "start") int start, @RequestParam String t_name, Model model) {
         PageInfo pageInfo = PageInfos.searchCourseOfTeacher(start, t_name, courseService);
@@ -331,15 +471,25 @@ public class AdminController {
     }
 
 
-    //去往教师课程修改信息页面
+    /**
+     * 去往教师课程修改信息页面
+     * @param c_id
+     * @param model
+     * @return
+     */
     @RequestMapping("/ToUpdateCourse/{c_id}")
-    public String ToUpdateCourse(@PathVariable int c_id, Model model) {
+    public String toUpdateCourse(@PathVariable int c_id, Model model) {
         Course course = courseService.queryCourseByTeacher(c_id);
         model.addAttribute("course", course);
         return "admin/updateCourse";
     }
 
-    //修改教师的开课信息
+    /**
+     * 修改教师的开课信息
+     * @param course
+     * @return
+     * @throws JsonProcessingException
+     */
     @ResponseBody
     @RequestMapping("/updateCourseOfTeacher")
     public String updateCourseOfTeacher(Course course) throws JsonProcessingException {
@@ -352,7 +502,13 @@ public class AdminController {
 
     }
 
-    // 删除教师的开课信息
+    /**
+     * 删除教师的开课信息
+     * @param t_teacherid
+     * @param c_id
+     * @param session
+     * @return
+     */
     @ResponseBody
     @RequestMapping("/deleteCourseOfAdmin")
     public String deleteCourseOfAdmin(@RequestParam String t_teacherid, @RequestParam int c_id, HttpSession session) {

@@ -88,5 +88,13 @@ public class CourseServiceImpl implements CourseService {
         return courseMapper.updateCourseOfAdmin(course);
     }
 
+    @Override
+    public List<String> queryCProperties() {
+        return courseMapper.queryC_Properties();
+    }
 
+    @Override
+    public List<Course> searchChooseCourse(String s_studentid, String c_name) {
+        return courseMapper.searchChooseCourse(s_studentid,c_name);
+    }
 }

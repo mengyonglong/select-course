@@ -3,6 +3,7 @@ package com.myl.service;
 import com.myl.dao.StudentMapper;
 import com.myl.pojo.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.ScheduledTaskRegistrar;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,11 +42,11 @@ public class StudentServiceImpl implements StudentService {
         return studentMapper.queryStudentByid(s_id);
     }
 
-
     @Override
-    public Student queryStudentByName() {
-        return studentMapper.queryStudentByName();
+    public List<Student> queryStudentByName(String s_name) {
+        return studentMapper.queryStudentByName(s_name);
     }
+
 
     @Override
     public int updateStudent(Student student) {
